@@ -10,45 +10,46 @@ import SwiftUI
 struct ContentView: View {
     @State private var isDetecting = false //temporär variabel bara
     let motionViewModel = MotionViewModel()
+    @State private var test = 0
+    
+    @State private var isFavorite = false
     
     var body: some View {
         VStack {
             
-            if isDetecting == false {
-                Button {
-                    motionViewModel.startMotionModel()
+            Button {
+                
+                
+                if isDetecting == false{
                     isDetecting = true
+                    motionViewModel.startMotionModel()
+                    print("börjar detect")
                     
-                } label: {
-                    Image(systemName: "hand.raised.brakesignal")
-                        .frame(width: 42, height: 42)
-                        .foregroundColor(AppColors.noDetectingGesturesRed)
-                        .symbolEffect(.bounce, value: 5)
-                }
-                .font(.largeTitle)
-                .buttonStyle(PlainButtonStyle())
-            } else {
-                Button {
-                    motionViewModel.stopMotionModel()
+                } else {
                     isDetecting = false
+                    motionViewModel.stopMotionModel()
+                    print("slutar detect")
                     
-                    print("hej")
-                } label: {
-                    Image(systemName: "hand.raised.brakesignal")
-                        .frame(width: 42, height: 42)
-                        .foregroundColor(AppColors.detectingGesturesRed)
-                        .symbolEffect(.bounce, value: 2) // denna funkar inte...
                 }
-                .symbolEffect(.bounce, value: 5)
-                .font(.largeTitle)
-                .buttonStyle(PlainButtonStyle())
+                
+                
+            } label: {
+                Image(systemName: "hand.raised.brakesignal")
+                    .frame(width: 42, height: 42)
+                    .symbolEffect(.bounce.up, options:  isDetecting ? .repeating : .nonRepeating,value: isDetecting)
+                    .foregroundColor(isDetecting ? AppColors.detectingGesturesRed : AppColors.noDetectingGesturesRed)
+                    
+            }
+            .font(.largeTitle)
+            .buttonStyle(PlainButtonStyle())
+            
+            if isDetecting == false {
+                Text("Tap to detect hand gestures")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color.black)
+                    .multilineTextAlignment(.center)
             }
             
-        
-            Text("Tap to detect hand gestures")
-                .font(.system(size: 12))
-                .foregroundColor(Color.black)
-                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
