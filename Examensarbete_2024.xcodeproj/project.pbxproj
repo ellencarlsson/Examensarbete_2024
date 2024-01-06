@@ -12,6 +12,19 @@
 		C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD202B488A50008A4771 /* ContentView.swift */; };
 		C1A9BD232B488A51008A4771 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD222B488A51008A4771 /* Assets.xcassets */; };
 		C1A9BD262B488A51008A4771 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD252B488A51008A4771 /* Preview Assets.xcassets */; };
+		C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD312B488D6D008A4771 /* ColorScheme.swift */; };
+		C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD3D2B489A72008A4771 /* MotionModel.swift */; };
+		C1A9BD402B489A82008A4771 /* MotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD3F2B489A82008A4771 /* MotionViewModel.swift */; };
+		C1A9BD442B489FCD008A4771 /* DataAtGestures in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD432B489FCD008A4771 /* DataAtGestures */; };
+		C1A9BD462B489FDA008A4771 /* ExplanationOfData in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD452B489FDA008A4771 /* ExplanationOfData */; };
+		C1A9BD4B2B48A45D008A4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */; };
+		C1A9BD4C2B48A45D008A4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */; };
+		C1A9BD502B48A6E4008A4771 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD4F2B48A6E4008A4771 /* FirebaseAnalytics */; };
+		C1A9BD522B48A6E4008A4771 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD512B48A6E4008A4771 /* FirebaseAnalyticsOnDeviceConversion */; };
+		C1A9BD542B48A6E4008A4771 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD532B48A6E4008A4771 /* FirebaseAnalyticsSwift */; };
+		C1A9BD562B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD552B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		C1A9BD582B48A6E4008A4771 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD572B48A6E4008A4771 /* FirebaseAppCheck */; };
+		C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD5A2B48A8A7008A4771 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +58,14 @@
 		C1A9BD202B488A50008A4771 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C1A9BD222B488A51008A4771 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1A9BD252B488A51008A4771 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C1A9BD312B488D6D008A4771 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
+		C1A9BD3D2B489A72008A4771 /* MotionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionModel.swift; sourceTree = "<group>"; };
+		C1A9BD3F2B489A82008A4771 /* MotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionViewModel.swift; sourceTree = "<group>"; };
+		C1A9BD432B489FCD008A4771 /* DataAtGestures */ = {isa = PBXFileReference; lastKnownFileType = text; path = DataAtGestures; sourceTree = "<group>"; };
+		C1A9BD452B489FDA008A4771 /* ExplanationOfData */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExplanationOfData; sourceTree = "<group>"; };
+		C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Examensarbete-2024-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C1A9BD5A2B48A8A7008A4771 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +73,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1A9BD542B48A6E4008A4771 /* FirebaseAnalyticsSwift in Frameworks */,
+				C1A9BD502B48A6E4008A4771 /* FirebaseAnalytics in Frameworks */,
+				C1A9BD522B48A6E4008A4771 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				C1A9BD582B48A6E4008A4771 /* FirebaseAppCheck in Frameworks */,
+				C1A9BD562B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +87,8 @@
 		C1A9BD0C2B488A50008A4771 = {
 			isa = PBXGroup;
 			children = (
+				C1A9BD452B489FDA008A4771 /* ExplanationOfData */,
+				C1A9BD432B489FCD008A4771 /* DataAtGestures */,
 				C1A9BD1D2B488A50008A4771 /* Examensarbete_2024 Watch App */,
 				C1A9BD142B488A50008A4771 /* Products */,
 			);
@@ -78,8 +106,13 @@
 		C1A9BD1D2B488A50008A4771 /* Examensarbete_2024 Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */,
+				C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */,
+				C1A9BD352B489302008A4771 /* ViewModels */,
+				C1A9BD342B4892F4008A4771 /* Models */,
+				C1A9BD302B488CAF008A4771 /* Views */,
 				C1A9BD1E2B488A50008A4771 /* Examensarbete_2024App.swift */,
-				C1A9BD202B488A50008A4771 /* ContentView.swift */,
+				C1A9BD592B48A840008A4771 /* Database */,
 				C1A9BD222B488A51008A4771 /* Assets.xcassets */,
 				C1A9BD242B488A51008A4771 /* Preview Content */,
 			);
@@ -92,6 +125,39 @@
 				C1A9BD252B488A51008A4771 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C1A9BD302B488CAF008A4771 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C1A9BD202B488A50008A4771 /* ContentView.swift */,
+				C1A9BD312B488D6D008A4771 /* ColorScheme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C1A9BD342B4892F4008A4771 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1A9BD3D2B489A72008A4771 /* MotionModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1A9BD352B489302008A4771 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C1A9BD3F2B489A82008A4771 /* MotionViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C1A9BD592B48A840008A4771 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C1A9BD5A2B48A8A7008A4771 /* DataManager.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +193,13 @@
 			dependencies = (
 			);
 			name = "Examensarbete_2024 Watch App";
+			packageProductDependencies = (
+				C1A9BD4F2B48A6E4008A4771 /* FirebaseAnalytics */,
+				C1A9BD512B48A6E4008A4771 /* FirebaseAnalyticsOnDeviceConversion */,
+				C1A9BD532B48A6E4008A4771 /* FirebaseAnalyticsSwift */,
+				C1A9BD552B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				C1A9BD572B48A6E4008A4771 /* FirebaseAppCheck */,
+			);
 			productName = "Examensarbete_2024 Watch App";
 			productReference = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +231,9 @@
 				Base,
 			);
 			mainGroup = C1A9BD0C2B488A50008A4771;
+			packageReferences = (
+				C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = C1A9BD142B488A50008A4771 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -173,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1A9BD4B2B48A45D008A4771 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +258,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1A9BD262B488A51008A4771 /* Preview Assets.xcassets in Resources */,
+				C1A9BD442B489FCD008A4771 /* DataAtGestures in Resources */,
+				C1A9BD4C2B48A45D008A4771 /* GoogleService-Info.plist in Resources */,
 				C1A9BD232B488A51008A4771 /* Assets.xcassets in Resources */,
+				C1A9BD462B489FDA008A4771 /* ExplanationOfData in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +273,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */,
+				C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */,
+				C1A9BD402B489A82008A4771 /* MotionViewModel.swift in Sources */,
+				C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */,
+				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
 				C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,9 +414,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Examensarbete_2024 Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Examensarbete-2024-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -347,7 +434,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -359,9 +446,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Examensarbete_2024 Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Examensarbete-2024-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -377,7 +467,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -387,6 +477,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "se.ellen.Examensarbete-2024";
@@ -402,6 +493,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "se.ellen.Examensarbete-2024";
@@ -443,6 +535,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C1A9BD4F2B48A6E4008A4771 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C1A9BD512B48A6E4008A4771 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		C1A9BD532B48A6E4008A4771 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		C1A9BD552B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		C1A9BD572B48A6E4008A4771 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C1A9BD0D2B488A50008A4771 /* Project object */;
 }

@@ -5,13 +5,25 @@
 //  Created by Ellen Carlsson on 2024-01-05.
 //
 
+import Firebase
 import SwiftUI
 
 @main
-struct Examensarbete_2024_Watch_AppApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+struct FirebaseExampleApp: App {
+  init() {
+    FirebaseApp.configure()
+  }
+  
+  var body: some Scene {
+    WindowGroup {
+      NavigationView {
+        ContentView()
+      }
     }
+  }
 }
+
+
+
+
+
