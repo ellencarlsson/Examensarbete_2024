@@ -23,7 +23,6 @@ struct ContentView: View {
                 } else {
                     isDetecting = false
                     motionViewModel.stopMotionModel()
-                    databaseViewModel.addData()
                     print("slutar detect")
                 }
                 

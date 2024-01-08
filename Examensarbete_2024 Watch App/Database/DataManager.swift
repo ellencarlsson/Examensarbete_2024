@@ -10,47 +10,29 @@ import FirebaseDatabase
 
 
 class DataManager: ObservableObject {
-    @Published var message = "Does it work?"
-
-    private let databaseURL = "https://examensarbete2024-6a1dc-default-rtdb.europe-west1.firebasedatabase.app" // Replace with your Firebase project's URL
-    private let messagesPath = "/.json" // Replace with your specific path
+    private let databaseURL = "https://examensarbete2024-6a1dc-default-rtdb.europe-west1.firebasedatabase.app"
+    private let path = "/a/.json" //ändra här för att ändra namn på table
 
     private var messageHandle: URLSessionDataTask?
-
-    func startMessageListener() {
-        let url = URL(string: databaseURL + messagesPath)!
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let value = json.values.first as? String {
-                    DispatchQueue.main.async {
-                        self.message = value
-                    }
-                }
-            } catch {
-                print("Error decoding JSON: \(error.localizedDescription)")
-            }
-        }
-
-        task.resume()
-        messageHandle = task
-    }
 
     func stopMessageListener() {
         messageHandle?.cancel()
     }
 
-    func addMessageToDatabase(newMessage: String) {
-        let url = URL(string: databaseURL + messagesPath)!
+    func addDataToDatabase(motionData: MotionData) {
+        let encoder = JSONEncoder()
+        encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "Infinity", negativeInfinity: "-Infinity", nan: "NaN")
+
+        guard let jsonData = try? encoder.encode(motionData) else {
+            print("Error encoding gestureData")
+            return
+        }
+
+        let url = URL(string: databaseURL + path)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: ["message": newMessage])
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             // Handle the response if needed
@@ -58,4 +40,44 @@ class DataManager: ObservableObject {
 
         task.resume()
     }
+    
+    
+    
+    func readDataFromDatabase(completion: @escaping (MotionData?) -> Void) {
+        let url = URL(string: databaseURL + path)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error reading data: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                completion(nil)
+                return
+            }
+            
+            if let jsonString = String(data: data, encoding: .utf8) {
+                        print("Received JSON data: \(jsonString)")
+                    }
+
+            do {
+                let decoder = JSONDecoder()
+                let motionData = try decoder.decode(MotionData.self, from: data)
+                completion(motionData)
+            } catch {
+                print("Error decoding data: \(error)")
+                completion(nil)
+            }
+        }
+
+        task.resume()
+    }
+
+
+
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C14CA8CB2B4C923200E40034 /* DataAnalyzingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14CA8CA2B4C923200E40034 /* DataAnalyzingModel.swift */; };
 		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
 		C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */; };
 		C1A9BD1A2B488A50008A4771 /* Examensarbete_2024 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -54,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C14CA8CA2B4C923200E40034 /* DataAnalyzingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAnalyzingModel.swift; sourceTree = "<group>"; };
 		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		C1A9BD132B488A50008A4771 /* Examensarbete_2024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examensarbete_2024.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Examensarbete_2024 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				C1A9BD3D2B489A72008A4771 /* MotionModel.swift */,
+				C14CA8CA2B4C923200E40034 /* DataAnalyzingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */,
 				C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */,
 				C1A9BD402B489A82008A4771 /* MotionViewModel.swift in Sources */,
+				C14CA8CB2B4C923200E40034 /* DataAnalyzingModel.swift in Sources */,
 				C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */,
 				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
 				C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */,

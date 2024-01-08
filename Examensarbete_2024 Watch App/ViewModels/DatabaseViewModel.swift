@@ -10,7 +10,7 @@ import Foundation
 class DatabaseViewModel{
     let dataManager = DataManager()
     
-    func addData(){
-        dataManager.addMessageToDatabase(newMessage: "hej")
+    func addDataToDatabase(motionData: MotionData){
+        dataManager.addDataToDatabase(motionData: motionData)
     }
 }
