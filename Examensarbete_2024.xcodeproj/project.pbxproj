@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C14CA8CB2B4C923200E40034 /* DataAnalyzingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14CA8CA2B4C923200E40034 /* DataAnalyzingModel.swift */; };
+		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
+		C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */; };
 		C1A9BD1A2B488A50008A4771 /* Examensarbete_2024 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD1E2B488A50008A4771 /* Examensarbete_2024App.swift */; };
 		C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD202B488A50008A4771 /* ContentView.swift */; };
@@ -52,6 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C14CA8CA2B4C923200E40034 /* DataAnalyzingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAnalyzingModel.swift; sourceTree = "<group>"; };
+		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		C1A9BD132B488A50008A4771 /* Examensarbete_2024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examensarbete_2024.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Examensarbete_2024 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A9BD1E2B488A50008A4771 /* Examensarbete_2024App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examensarbete_2024App.swift; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */,
 				C1A9BD542B48A6E4008A4771 /* FirebaseAnalyticsSwift in Frameworks */,
 				C1A9BD502B48A6E4008A4771 /* FirebaseAnalytics in Frameworks */,
 				C1A9BD522B48A6E4008A4771 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
@@ -84,6 +90,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C1A5A13E2B48D96200102BE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C1A9BD0C2B488A50008A4771 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +104,7 @@
 				C1A9BD432B489FCD008A4771 /* DataAtGestures */,
 				C1A9BD1D2B488A50008A4771 /* Examensarbete_2024 Watch App */,
 				C1A9BD142B488A50008A4771 /* Products */,
+				C1A5A13E2B48D96200102BE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				C1A9BD3D2B489A72008A4771 /* MotionModel.swift */,
+				C14CA8CA2B4C923200E40034 /* DataAnalyzingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				C1A9BD3F2B489A82008A4771 /* MotionViewModel.swift */,
+				C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -199,6 +215,7 @@
 				C1A9BD532B48A6E4008A4771 /* FirebaseAnalyticsSwift */,
 				C1A9BD552B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				C1A9BD572B48A6E4008A4771 /* FirebaseAppCheck */,
+				C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */,
 			);
 			productName = "Examensarbete_2024 Watch App";
 			productReference = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */;
@@ -275,8 +292,10 @@
 				C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */,
 				C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */,
 				C1A9BD402B489A82008A4771 /* MotionViewModel.swift in Sources */,
+				C14CA8CB2B4C923200E40034 /* DataAnalyzingModel.swift in Sources */,
 				C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */,
 				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
+				C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */,
 				C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +567,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
 		C1A9BD4F2B48A6E4008A4771 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C1A9BD4E2B48A6E4008A4771 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

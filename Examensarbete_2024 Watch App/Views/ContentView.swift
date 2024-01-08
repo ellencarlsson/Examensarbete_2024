@@ -10,16 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @State private var isDetecting = false //temporär variabel bara
     let motionViewModel = MotionViewModel()
-    @State private var test = 0
-    
-    @State private var isFavorite = false
+    let databaseViewModel = DatabaseViewModel()
     
     var body: some View {
         VStack {
-            
             Button {
-                
-                
                 if isDetecting == false{
                     isDetecting = true
                     motionViewModel.startMotionModel()
@@ -29,16 +24,14 @@ struct ContentView: View {
                     isDetecting = false
                     motionViewModel.stopMotionModel()
                     print("slutar detect")
-                    
                 }
-                
                 
             } label: {
                 Image(systemName: "hand.raised.brakesignal")
                     .frame(width: 42, height: 42)
                     .symbolEffect(.bounce.up, options:  isDetecting ? .repeating : .nonRepeating,value: isDetecting)
                     .foregroundColor(isDetecting ? AppColors.detectingGesturesRed : AppColors.noDetectingGesturesRed)
-                    
+                
             }
             .font(.largeTitle)
             .buttonStyle(PlainButtonStyle())
@@ -55,9 +48,7 @@ struct ContentView: View {
         .padding()
         .background(AppColors.backgroundBeige)
         
-        
     }
-    
 }
 
 #Preview {
