@@ -12,72 +12,37 @@ import FirebaseDatabase
 class DataManager: ObservableObject {
     private let databaseURL = "https://examensarbete2024-6a1dc-default-rtdb.europe-west1.firebasedatabase.app"
     private let path = "/a/.json" //ändra här för att ändra namn på table
-
+    
     private var messageHandle: URLSessionDataTask?
-
+    
     func stopMessageListener() {
         messageHandle?.cancel()
     }
-
+    
     func addDataToDatabase(motionData: MotionData) {
         let encoder = JSONEncoder()
         encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "Infinity", negativeInfinity: "-Infinity", nan: "NaN")
-
+        
         guard let jsonData = try? encoder.encode(motionData) else {
             print("Error encoding gestureData")
             return
         }
-
+        
         let url = URL(string: databaseURL + path)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            // Handle the response if needed
-        }
-
-        task.resume()
-    }
-    
-    
-    
-    func readDataFromDatabase(completion: @escaping (MotionData?) -> Void) {
-        let url = URL(string: databaseURL + path)!
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error reading data: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let data = data else {
-                print("No data received")
-                completion(nil)
-                return
-            }
-            
-            if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Received JSON data: \(jsonString)")
-                    }
-
-            do {
-                let decoder = JSONDecoder()
-                let motionData = try decoder.decode(MotionData.self, from: data)
-                completion(motionData)
-            } catch {
-                print("Error decoding data: \(error)")
-                completion(nil)
+                print("Error adding data to database: \(error)")
+            } else {
+                print("Data added to database")
             }
         }
-
+        
         task.resume()
+        
     }
-
-
-
 }
