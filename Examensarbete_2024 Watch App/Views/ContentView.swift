@@ -14,39 +14,56 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Button {
-                if isDetecting == false{
-                    isDetecting = true
-                    motionViewModel.startMotionModel()
-                    print("börjar detect")
-                    
-                } else {
+            
+            if isDetecting == true {
+                
+                Button {
                     isDetecting = false
                     motionViewModel.stopMotionModel()
-                    print("slutar detect")
+                    print("Stopping detection")
+                    
+                } label: {
+                    Image(systemName: "hand.raised.brakesignal")
+                        .frame(width: 42, height: 42)
+                        .symbolEffect(.bounce.up, options:  isDetecting ? .repeating : .nonRepeating,value: 0)
+                        .foregroundColor(isDetecting ? AppColors.detectingGesturesRed : AppColors.noDetectingGesturesRed)
+                    
                 }
+                .font(.largeTitle)
+                .buttonStyle(PlainButtonStyle())
                 
-            } label: {
-                Image(systemName: "hand.raised.brakesignal")
-                    .frame(width: 42, height: 42)
-                    .symbolEffect(.bounce.up, options:  isDetecting ? .repeating : .nonRepeating,value: isDetecting)
-                    .foregroundColor(isDetecting ? AppColors.detectingGesturesRed : AppColors.noDetectingGesturesRed)
-                
-            }
-            .font(.largeTitle)
-            .buttonStyle(PlainButtonStyle())
-            
-            if isDetecting == false {
-                Text("Tap to detect hand gestures")
+                Text("Detecting...")
                     .font(.system(size: 12))
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
             }
             
+            if isDetecting == false {
+                
+                Button {
+                    isDetecting = true
+                    motionViewModel.startMotionModel()
+                    print("Starting detection")
+                } label: {
+                    Image(systemName: "hand.raised.brakesignal")
+                        .frame(width: 42, height: 42)
+                        .symbolEffect(.bounce.up, options: .nonRepeating,value: false)
+                        .foregroundColor(isDetecting ? AppColors.detectingGesturesRed : AppColors.noDetectingGesturesRed)
+                }
+                .font(.largeTitle)
+                .buttonStyle(PlainButtonStyle())
+                
+                Text("Tap to detect hand gestures")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color.black)
+                    .multilineTextAlignment(.center)
+                
+            }
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-        .background(AppColors.backgroundBeige)
+        .background(Color.white)
         
     }
 }
