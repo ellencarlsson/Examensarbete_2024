@@ -1,5 +1,0 @@
-Här skrivs olika data ner och förklarar hur värdena fungerar
-
--- deviceMotionData --
-attitude.pitch: när klockan pekar åt vänster är värdet -1, när den pekar åt höger är det +1, höjden spelar inte så stor roll
-

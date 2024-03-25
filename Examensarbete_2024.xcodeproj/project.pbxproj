@@ -17,8 +17,6 @@
 		C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD312B488D6D008A4771 /* ColorScheme.swift */; };
 		C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD3D2B489A72008A4771 /* MotionModel.swift */; };
 		C1A9BD402B489A82008A4771 /* MotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD3F2B489A82008A4771 /* MotionViewModel.swift */; };
-		C1A9BD442B489FCD008A4771 /* DataAtGestures in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD432B489FCD008A4771 /* DataAtGestures */; };
-		C1A9BD462B489FDA008A4771 /* ExplanationOfData in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD452B489FDA008A4771 /* ExplanationOfData */; };
 		C1A9BD4B2B48A45D008A4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */; };
 		C1A9BD4C2B48A45D008A4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */; };
 		C1A9BD502B48A6E4008A4771 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD4F2B48A6E4008A4771 /* FirebaseAnalytics */; };
@@ -64,8 +62,6 @@
 		C1A9BD312B488D6D008A4771 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		C1A9BD3D2B489A72008A4771 /* MotionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionModel.swift; sourceTree = "<group>"; };
 		C1A9BD3F2B489A82008A4771 /* MotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionViewModel.swift; sourceTree = "<group>"; };
-		C1A9BD432B489FCD008A4771 /* DataAtGestures */ = {isa = PBXFileReference; lastKnownFileType = text; path = DataAtGestures; sourceTree = "<group>"; };
-		C1A9BD452B489FDA008A4771 /* ExplanationOfData */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExplanationOfData; sourceTree = "<group>"; };
 		C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Examensarbete-2024-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C1A9BD5A2B48A8A7008A4771 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -98,8 +94,6 @@
 		C1A9BD0C2B488A50008A4771 = {
 			isa = PBXGroup;
 			children = (
-				C1A9BD452B489FDA008A4771 /* ExplanationOfData */,
-				C1A9BD432B489FCD008A4771 /* DataAtGestures */,
 				C1A9BD1D2B488A50008A4771 /* Examensarbete_2024 Watch App */,
 				C1A9BD142B488A50008A4771 /* Products */,
 				C1A5A13E2B48D96200102BE4 /* Frameworks */,
@@ -272,10 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1A9BD262B488A51008A4771 /* Preview Assets.xcassets in Resources */,
-				C1A9BD442B489FCD008A4771 /* DataAtGestures in Resources */,
 				C1A9BD4C2B48A45D008A4771 /* GoogleService-Info.plist in Resources */,
 				C1A9BD232B488A51008A4771 /* Assets.xcassets in Resources */,
-				C1A9BD462B489FDA008A4771 /* ExplanationOfData in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
