@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+import WatchKit
+
+func vibrateAppleWatch() {
+    WKInterfaceDevice.current().play(.notification)
+}
+
 struct ContentView: View {
     @State private var isDetectingForTraining = false
     @StateObject var gestureViewModel = GestureViewModel()
@@ -125,6 +131,9 @@ struct ContentView: View {
                             .font(.title)
                             .bold()
                             .onAppear(perform: {
+                                vibrateAppleWatch()
+                                speaker.speak(predictedLetter)
+                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     word += predictedLetter
                                     predictedLetter = ""
