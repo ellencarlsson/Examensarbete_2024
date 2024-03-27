@@ -9,39 +9,7 @@ import SwiftUI
 
 struct DetectionView: View {
     var body: some View {
-        VStack {
-            
-            Button(action: {}) {
-                Image(systemName: "arrow.backward.circle")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.black)
-                
-            }
-            .padding(-16)
-            
-            //.padding(.bottom, 60)
-            
-            .padding(.trailing, 100)
-            
-            //Spacer()
-            
-            Text("letter")
-                .foregroundColor(.black)
-                .padding(.bottom, 45)
-                .padding(.top, 55)
-            
-            //Spacer()
-            
-            Text("word")
-                .foregroundColor(.black)
-            .padding(.bottom, 10)
-            //.padding(.top, 50)
-            
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding()
-        .background(Color.white)
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 

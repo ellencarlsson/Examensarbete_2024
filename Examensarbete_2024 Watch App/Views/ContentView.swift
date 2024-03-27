@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isDetectingForTraining = false
-    let gestureViewModel = GestureViewModel()
+    @StateObject var gestureViewModel = GestureViewModel()
     let databaseViewModel = DatabaseViewModel()
     let speaker = Speaker()
     
@@ -18,6 +18,12 @@ struct ContentView: View {
     @State var counter = 0
     
     @State var isDetecting = false
+    
+    @State var predictedLetter: String = ""
+    
+    @State var word = ""
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
     
     var body: some View {
         VStack {
@@ -84,8 +90,10 @@ struct ContentView: View {
                 if isDetecting {
                     
                     // detection screen
+                    
                     Button(action: {
                         isDetecting = false
+                        word = ""
                     }) {
                         Image(systemName: "arrow.backward.circle")
                             .resizable()
@@ -94,18 +102,38 @@ struct ContentView: View {
                     }
                     .padding(-16)
                     .padding(.trailing, 100)
+
                     
-                    Text("\(gestureViewModel.getPredictedLetter().___letter)")
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 50)
-                        .padding(.top, 45)
-                        .font(.title)
-                        .bold()
-                        .onAppear {
-                            speaker.speak(gestureViewModel.getPredictedLetter().___letter)
+                    if predictedLetter == "" {
+                        Image(systemName: "hand.raised.brakesignal")
+                            .resizable()
+                            .frame(width: 60, height: 40)
+                            .symbolEffect(.bounce.up, options: .nonRepeating,value: predictedLetter)
+                            .foregroundColor(AppColors.detectingGesturesRed)
+                            .padding(.bottom, 65)
+                            .padding(.top, 45)
+                            .onReceive(timer) { _ in
+                                predictedLetter = gestureViewModel.getPredictedLetter()
+                                
                             }
+                            
+                    } else {
+                        Text("\(predictedLetter)")
+                            .foregroundStyle(.black)
+                            .padding(.bottom, 50)
+                            .padding(.top, 45)
+                            .font(.title)
+                            .bold()
+                            .onAppear(perform: {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    word += predictedLetter
+                                    predictedLetter = ""
+                                }
+                            })
+                            
+                    }
                     
-                    Text("Word")
+                    Text("\(word)")
                         .foregroundColor(.black)
                         .padding(.bottom, 5)
                         .font(.system(size: 20))
@@ -114,9 +142,12 @@ struct ContentView: View {
                     
                     // tap to detect screen
                     Button {
+                        gestureViewModel.startMotionModel()
+                        predictedLetter = gestureViewModel.getPredictedLetter()
+                        
                         isDetecting = true
                         print("Starting detection")
-                        gestureViewModel.startMotionModel()
+                        
                         
                     } label: {
                         Image(systemName: "hand.raised.brakesignal")
@@ -128,6 +159,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .buttonStyle(PlainButtonStyle())
                     .padding(20)
+                    
                     
                     Text("Tap to detect hand")
                         .font(.system(size: 12))

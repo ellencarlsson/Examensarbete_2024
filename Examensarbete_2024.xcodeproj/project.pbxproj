@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		C14053A92BB331E500B1939B /* HandSignDetection1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053A82BB331E500B1939B /* HandSignDetection1.mlmodel */; };
 		C14053AB2BB336C600B1939B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AA2BB336C600B1939B /* TestModel.swift */; };
-		C14053AF2BB38C2900B1939B /* DetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AE2BB38C2900B1939B /* DetectionView.swift */; };
 		C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053B02BB39EAF00B1939B /* Speaker.swift */; };
+		C14053B72BB42F4000B1939B /* HandSignDetectionSVM.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053B32BB42F4000B1939B /* HandSignDetectionSVM.mlmodel */; };
+		C14053B92BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053B52BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel */; };
+		C14053BB2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053BA2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel */; };
+		C14053BD2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053BC2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel */; };
 		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
 		C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */; };
 		C1A9BD1A2B488A50008A4771 /* Examensarbete_2024 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -58,8 +61,11 @@
 /* Begin PBXFileReference section */
 		C14053A82BB331E500B1939B /* HandSignDetection1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandSignDetection1.mlmodel; sourceTree = "<group>"; };
 		C14053AA2BB336C600B1939B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
-		C14053AE2BB38C2900B1939B /* DetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionView.swift; sourceTree = "<group>"; };
 		C14053B02BB39EAF00B1939B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		C14053B32BB42F4000B1939B /* HandSignDetectionSVM.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandSignDetectionSVM.mlmodel; sourceTree = "<group>"; };
+		C14053B52BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandSignDetectionRandomForest.mlmodel; sourceTree = "<group>"; };
+		C14053BA2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = HandSignDetectionDecisionTree.mlmodel; path = ../../../HandSignDetectionDecisionTree.mlmodel; sourceTree = "<group>"; };
+		C14053BC2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = HandSignDetectionBoostedTree.mlmodel; path = ../../../HandSignDetectionBoostedTree.mlmodel; sourceTree = "<group>"; };
 		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		C1A9BD132B488A50008A4771 /* Examensarbete_2024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examensarbete_2024.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Examensarbete_2024 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				C14053A82BB331E500B1939B /* HandSignDetection1.mlmodel */,
+				C14053B52BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel */,
+				C14053BA2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel */,
+				C14053BC2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel */,
+				C14053B32BB42F4000B1939B /* HandSignDetectionSVM.mlmodel */,
 				C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */,
 				C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */,
 				C1A9BD352B489302008A4771 /* ViewModels */,
@@ -148,7 +158,6 @@
 			children = (
 				C1A9BD202B488A50008A4771 /* ContentView.swift */,
 				C1A9BD312B488D6D008A4771 /* ColorScheme.swift */,
-				C14053AE2BB38C2900B1939B /* DetectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,11 +302,14 @@
 				C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */,
 				C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */,
 				C1A9BD402B489A82008A4771 /* GestureViewModel.swift in Sources */,
+				C14053B72BB42F4000B1939B /* HandSignDetectionSVM.mlmodel in Sources */,
+				C14053BB2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel in Sources */,
 				C14053AB2BB336C600B1939B /* TestModel.swift in Sources */,
+				C14053BD2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel in Sources */,
 				C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */,
+				C14053B92BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel in Sources */,
 				C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */,
 				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
-				C14053AF2BB38C2900B1939B /* DetectionView.swift in Sources */,
 				C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */,
 				C14053A92BB331E500B1939B /* HandSignDetection1.mlmodel in Sources */,
 				C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */,

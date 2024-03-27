@@ -8,7 +8,7 @@
 import Foundation
 import CoreMotion
 
-let currentLetter = "test" // This variable represents the charachter that will be trained
+private let currentLetter = "test" // This variable represents the charachter that will be trained
 
 struct MotionData: Encodable, Decodable {
     let letter: String
@@ -38,10 +38,12 @@ struct MotionData: Encodable, Decodable {
     }
 }
 
-class MotionModel {
+
+
+class MotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
     private let databaseViewModel = DatabaseViewModel()
-    var motionData = MotionData()
+    @Published var motionData = MotionData()
     let timeInterval = 0.1
     
     func startMotionUpdates() {
@@ -64,17 +66,21 @@ class MotionModel {
                         gravity_y: gravity.y,
                         gravity_z: gravity.z
                     )
+                                        
+                    //print(self.motionData)
                 }
             }
         }
     }
     
-    func stopMotionUpdatess () {
+    func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
+        print("stopping at: " + "\(self.motionData)")
     }
         
     func getCurrentMotion() -> MotionData {
-        return motionData
+        print("current data: " + "\(self.motionData)")
+        return self.motionData
     }
     
 }
