@@ -26,10 +26,6 @@ class TestModel {
                 ___gravity_y: incommingMotionData.gravity_y,
                 ___gravity_z: incommingMotionData.gravity_z)
 
-            print(prediction.targetProbability, prediction.___letter)
-            
-            
-            
             return prediction
             
         } catch {
