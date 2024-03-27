@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 class DataManager: ObservableObject {
     private let databaseURL = "https://examensarbete2024-6a1dc-default-rtdb.europe-west1.firebasedatabase.app"
-    private let path = "/a/.json" //ändra här för att ändra namn på table
+    private let path = "/.json"
     
     private var messageHandle: URLSessionDataTask?
     
@@ -28,7 +28,7 @@ class DataManager: ObservableObject {
             return
         }
         
-        let url = URL(string: databaseURL + path)!
+        let url = URL(string: databaseURL + path)! // Here was path
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

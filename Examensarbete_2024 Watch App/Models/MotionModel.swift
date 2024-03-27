@@ -8,7 +8,10 @@
 import Foundation
 import CoreMotion
 
+let currentLetter = "test" // This variable represents the charachter that will be trained
+
 struct MotionData: Encodable, Decodable {
+    let letter: String
     let attitude_pitch: Double
     let attitude_roll: Double
     let attitude_yaw: Double
@@ -17,6 +20,7 @@ struct MotionData: Encodable, Decodable {
     let gravity_z: Double
 
     init(
+        letter: String = currentLetter,
         attitude_pitch: Double = 0.0,
          attitude_roll: Double = 0.0,
          attitude_yaw: Double = 0.0,
@@ -24,6 +28,7 @@ struct MotionData: Encodable, Decodable {
          gravity_y: Double = 0.0,
          gravity_z: Double = 0.0
     ) {
+        self.letter = letter
         self.attitude_pitch = attitude_pitch
         self.attitude_roll = attitude_roll
         self.attitude_yaw = attitude_yaw
@@ -63,10 +68,13 @@ class MotionModel {
             }
         }
     }
-
-    func stopMotionUpdates() {
+    
+    func stopMotionUpdatess () {
         motionManager.stopDeviceMotionUpdates()
-        databaseViewModel.addDataToDatabase(motionData: motionData)
     }
         
+    func getCurrentMotion() -> MotionData {
+        return motionData
+    }
+    
 }
