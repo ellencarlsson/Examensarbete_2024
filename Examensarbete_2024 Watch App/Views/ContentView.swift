@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var isDetectingForTraining = false
     let gestureViewModel = GestureViewModel()
     let databaseViewModel = DatabaseViewModel()
+    let speaker = Speaker()
     
     @State var trainingMode = false // Change here to train/real app
     
@@ -100,6 +101,9 @@ struct ContentView: View {
                         .padding(.top, 45)
                         .font(.title)
                         .bold()
+                        .onAppear {
+                            speaker.speak(gestureViewModel.getPredictedLetter().___letter)
+                            }
                     
                     Text("Word")
                         .foregroundColor(.black)
