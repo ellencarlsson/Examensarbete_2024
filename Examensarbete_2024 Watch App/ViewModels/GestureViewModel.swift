@@ -15,11 +15,7 @@ class GestureViewModel {
     func startMotionModel(){
         motionModel.startMotionUpdates()
     }
-    
-    func stopMotionModel(){
-        motionModel.stopMotionUpdates()
-    }
-    
+
     func getCurrentMotion() -> MotionData{
         return motionModel.getCurrentMotion()
     }
@@ -32,7 +28,7 @@ class GestureViewModel {
     
     func getPredictedLetter() -> HandSignDetection1Output {
         let currentMotion = getCurrentMotion()
-        let prediction = testModel.testModel()!
+        let prediction = testModel.testModel(incommingMotionData: currentMotion)!
         return prediction
     }
     

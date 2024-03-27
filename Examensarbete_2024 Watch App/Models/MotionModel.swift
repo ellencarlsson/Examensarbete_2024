@@ -68,11 +68,6 @@ class MotionModel {
             }
         }
     }
-
-    func stopMotionUpdates() {
-        motionManager.stopDeviceMotionUpdates()
-        databaseViewModel.addDataToDatabase(motionData: motionData)
-    }
     
     func stopMotionUpdatess () {
         motionManager.stopDeviceMotionUpdates()

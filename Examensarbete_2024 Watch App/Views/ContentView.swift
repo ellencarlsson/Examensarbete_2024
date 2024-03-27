@@ -12,15 +12,11 @@ struct ContentView: View {
     let gestureViewModel = GestureViewModel()
     let databaseViewModel = DatabaseViewModel()
     
-    @State var trainingMode = true
+    @State var trainingMode = false // Change here to train/real app
     
     @State var counter = 0
     
     @State var isDetecting = false
-    
-    var predictedLetter: String {
-        gestureViewModel.getPredictedLetter().___letter
-    }
     
     var body: some View {
         VStack {
@@ -31,9 +27,9 @@ struct ContentView: View {
                 
                 if isDetectingForTraining == true {
                     
+                    // detecting in training
                     Button {
                         isDetectingForTraining = false
-                        //gestureViewModel.stopMotionModel()
                         gestureViewModel.addMotionDataToDatabase()
                         print("Stopping detection")
                         counter += 1
@@ -56,10 +52,9 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 10)
                         .padding(.top, 10)
-                }
-                
-                if isDetectingForTraining == false {
+                } else {
                     
+                    // tap to detect in training
                     Button {
                         isDetectingForTraining = true
                         gestureViewModel.startMotionModel()
@@ -81,14 +76,13 @@ struct ContentView: View {
                         .padding(.bottom, 10)
                         .padding(.top, 10)
 
-                    
-                    
                 }
                 
             } else {
                 
                 if isDetecting {
                     
+                    // detection screen
                     Button(action: {
                         isDetecting = false
                     }) {
@@ -113,6 +107,8 @@ struct ContentView: View {
                         .font(.system(size: 20))
                     
                 } else {
+                    
+                    // tap to detect screen
                     Button {
                         isDetecting = true
                         print("Starting detection")
