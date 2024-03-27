@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import WatchKit
 import AVFoundation
 
 class Speaker {

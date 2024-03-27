@@ -26,10 +26,24 @@ class GestureViewModel {
         databaseViewModel.addDataToDatabase(motionData: motiondata)
     }
     
-    func getPredictedLetter() -> HandSignDetection1Output {
+    func getPredictedLetter() -> String {
         let currentMotion = getCurrentMotion()
-        let prediction = testModel.testModel(incommingMotionData: currentMotion)!
-        return prediction
+        let prediction = testModel.testModel(incommingMotionData: currentMotion)
+        
+        if (prediction!.targetProbability["\(prediction!.___letter)"]) != nil {
+            if prediction!.targetProbability["\(prediction!.___letter)"]! > 0.75 {
+                //print("är högre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
+                
+                let predictedLetter: String = prediction!.___letter
+                return predictedLetter
+                
+            } else {
+                //print("är lägre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
+                
+                return ""
+            }
+        }
+        return ""
     }
     
 }

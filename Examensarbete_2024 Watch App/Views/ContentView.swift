@@ -19,6 +19,8 @@ struct ContentView: View {
     
     @State var isDetecting = false
     
+    @State var predictedLetter: String = ""
+    
     var body: some View {
         VStack {
             if trainingMode {
@@ -95,15 +97,15 @@ struct ContentView: View {
                     .padding(-16)
                     .padding(.trailing, 100)
                     
-                    Text("\(gestureViewModel.getPredictedLetter().___letter)")
+                    Text("\(predictedLetter)")
                         .foregroundStyle(.black)
                         .padding(.bottom, 50)
                         .padding(.top, 45)
                         .font(.title)
-                        .bold()
-                        .onAppear {
+                        //.bold()
+                        /*.onAppear {
                             speaker.speak(gestureViewModel.getPredictedLetter().___letter)
-                            }
+                            }*/
                     
                     Text("Word")
                         .foregroundColor(.black)
@@ -117,6 +119,7 @@ struct ContentView: View {
                         isDetecting = true
                         print("Starting detection")
                         gestureViewModel.startMotionModel()
+                        predictedLetter = gestureViewModel.getPredictedLetter()
                         
                     } label: {
                         Image(systemName: "hand.raised.brakesignal")
