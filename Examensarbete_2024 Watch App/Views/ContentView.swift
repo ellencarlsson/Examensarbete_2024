@@ -45,6 +45,7 @@ struct ContentView: View {
                         isDetectingForTraining = false
                         gestureViewModel.addMotionDataToDatabase()
                         print("Stopping detection")
+                        vibrateAppleWatch()
                         counter += 1
                         
                     } label: {
