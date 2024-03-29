@@ -7,13 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C14053A92BB331E500B1939B /* HandSignDetection1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053A82BB331E500B1939B /* HandSignDetection1.mlmodel */; };
 		C14053AB2BB336C600B1939B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AA2BB336C600B1939B /* TestModel.swift */; };
 		C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053B02BB39EAF00B1939B /* Speaker.swift */; };
-		C14053B72BB42F4000B1939B /* HandSignDetectionSVM.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053B32BB42F4000B1939B /* HandSignDetectionSVM.mlmodel */; };
-		C14053B92BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053B52BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel */; };
-		C14053BB2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053BA2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel */; };
-		C14053BD2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C14053BC2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel */; };
 		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
 		C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */; };
 		C1A9BD1A2B488A50008A4771 /* Examensarbete_2024 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -32,6 +27,7 @@
 		C1A9BD562B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD552B48A6E4008A4771 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		C1A9BD582B48A6E4008A4771 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = C1A9BD572B48A6E4008A4771 /* FirebaseAppCheck */; };
 		C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD5A2B48A8A7008A4771 /* DataManager.swift */; };
+		C1ABFD1A2BB70C2900DB9450 /* DetectionAERandomForest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,13 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C14053A82BB331E500B1939B /* HandSignDetection1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandSignDetection1.mlmodel; sourceTree = "<group>"; };
 		C14053AA2BB336C600B1939B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		C14053B02BB39EAF00B1939B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
-		C14053B32BB42F4000B1939B /* HandSignDetectionSVM.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandSignDetectionSVM.mlmodel; sourceTree = "<group>"; };
-		C14053B52BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandSignDetectionRandomForest.mlmodel; sourceTree = "<group>"; };
-		C14053BA2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = HandSignDetectionDecisionTree.mlmodel; path = ../../../HandSignDetectionDecisionTree.mlmodel; sourceTree = "<group>"; };
-		C14053BC2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = HandSignDetectionBoostedTree.mlmodel; path = ../../../HandSignDetectionBoostedTree.mlmodel; sourceTree = "<group>"; };
 		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		C1A9BD132B488A50008A4771 /* Examensarbete_2024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examensarbete_2024.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Examensarbete_2024 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +70,7 @@
 		C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Examensarbete-2024-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C1A9BD5A2B48A8A7008A4771 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DetectionAERandomForest.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,11 +118,7 @@
 		C1A9BD1D2B488A50008A4771 /* Examensarbete_2024 Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				C14053A82BB331E500B1939B /* HandSignDetection1.mlmodel */,
-				C14053B52BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel */,
-				C14053BA2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel */,
-				C14053BC2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel */,
-				C14053B32BB42F4000B1939B /* HandSignDetectionSVM.mlmodel */,
+				C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */,
 				C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */,
 				C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */,
 				C1A9BD352B489302008A4771 /* ViewModels */,
@@ -301,17 +289,13 @@
 			files = (
 				C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */,
 				C1A9BD5B2B48A8A7008A4771 /* DataManager.swift in Sources */,
+				C1ABFD1A2BB70C2900DB9450 /* DetectionAERandomForest.mlmodel in Sources */,
 				C1A9BD402B489A82008A4771 /* GestureViewModel.swift in Sources */,
-				C14053B72BB42F4000B1939B /* HandSignDetectionSVM.mlmodel in Sources */,
-				C14053BB2BB4353100B1939B /* HandSignDetectionDecisionTree.mlmodel in Sources */,
 				C14053AB2BB336C600B1939B /* TestModel.swift in Sources */,
-				C14053BD2BB4353600B1939B /* HandSignDetectionBoostedTree.mlmodel in Sources */,
 				C1A9BD3E2B489A72008A4771 /* MotionModel.swift in Sources */,
-				C14053B92BB42F4000B1939B /* HandSignDetectionRandomForest.mlmodel in Sources */,
 				C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */,
 				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
 				C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */,
-				C14053A92BB331E500B1939B /* HandSignDetection1.mlmodel in Sources */,
 				C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,13 +10,13 @@ import CoreML
 
 class TestModel {
     
-    func testModel (incommingMotionData: MotionData) -> HandSignDetectionSVMOutput? {
+    func testModel (incommingMotionData: MotionData) -> DetectionAERandomForestOutput? {
         
         do {
             
             let config = MLModelConfiguration()
             
-            let model = try HandSignDetectionSVM(configuration: config)
+            let model = try DetectionAERandomForest(configuration: config)
             
             let prediction = try model.prediction(
                 ___attitude_pitch: incommingMotionData.attitude_pitch,
