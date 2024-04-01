@@ -10,7 +10,7 @@ import CoreML
 
 class TestModel {
     
-    func testModel (incommingMotionData: MotionData) -> DetectionAERandomForestOutput? {
+    func testModel (incommingMotionData: StillMotionData) -> DetectionAERandomForestOutput? {
         
         do {
             

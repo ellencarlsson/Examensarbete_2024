@@ -10,7 +10,7 @@ import CoreMotion
 
 private let currentLetter = "e" // This variable represents the charachter that will be trained
 
-struct MotionData: Encodable, Decodable {
+struct StillMotionData: Encodable, Decodable {
     let letter: String
     let attitude_pitch: Double
     let attitude_roll: Double
@@ -18,9 +18,6 @@ struct MotionData: Encodable, Decodable {
     let gravity_x: Double
     let gravity_y: Double
     let gravity_z: Double
-    /*let rotationRate_x: Double
-    let rotationRate_y: Double
-    let rotationRate_z: Double*/
 
     init(
         letter: String = currentLetter,
@@ -30,9 +27,7 @@ struct MotionData: Encodable, Decodable {
         gravity_x: Double = 0.0,
         gravity_y: Double = 0.0,
         gravity_z: Double = 0.0
-        /*rotationRate_x: Double = 0.0,
-        rotationRate_y: Double = 0.0,
-        rotationRate_z: Double = 0.0*/
+        
     ) {
         self.letter = letter
         self.attitude_pitch = attitude_pitch
@@ -41,18 +36,14 @@ struct MotionData: Encodable, Decodable {
         self.gravity_x = gravity_x
         self.gravity_y = gravity_y
         self.gravity_z = gravity_z
-        /*self.rotationRate_x = rotationRate_x
-        self.rotationRate_y = rotationRate_y
-        self.rotationRate_z = rotationRate_z*/
+        
     }
 }
 
-
-
-class MotionModel: ObservableObject {
+class StillMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
     private let databaseViewModel = DatabaseViewModel()
-    @Published var motionData = MotionData()
+    @Published var motionData = StillMotionData()
     let timeInterval = 0.1
     
     func startMotionUpdates() {
@@ -62,27 +53,20 @@ class MotionModel: ObservableObject {
                 if let deviceMotionData = data {
                     let attitude = deviceMotionData.attitude
                     let gravity = deviceMotionData.gravity
-                    let heading = deviceMotionData.heading
-                    let rotationRate = deviceMotionData.rotationRate
                     
                     // attitude represent the orientation of the device in three-dimensional space. They indicate how much the device is tilted along its respective axes.
                     
                     // gravity provides information about the direction of gravity relative to the device's coordinate system.
 
-                    self.motionData = MotionData(
+                    self.motionData = StillMotionData(
                         attitude_pitch: attitude.pitch,
                         attitude_roll: attitude.roll,
                         attitude_yaw: attitude.yaw,
                         gravity_x: gravity.x,
                         gravity_y: gravity.y,
                         gravity_z: gravity.z
-                        /*rotationRate_x: rotationRate.x,
-                        rotationRate_y: rotationRate.y,
-                        rotationRate_z: rotationRate.z*/
+                        
                     )
-                    
-                    
-                                                            
                 }
             }
         }
@@ -93,9 +77,8 @@ class MotionModel: ObservableObject {
         print("stopping at: " + "\(self.motionData)")
     }
         
-    func getCurrentMotion() -> MotionData {
+    func getCurrentMotion() -> StillMotionData {
         print("current data: " + "\(self.motionData)")
         return self.motionData
     }
-    
 }

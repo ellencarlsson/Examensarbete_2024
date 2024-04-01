@@ -8,31 +8,43 @@
 import Foundation
 
 class GestureViewModel: ObservableObject {
-    let motionModel = MotionModel()
+    let stillMotionModel = StillMotionModel()
     let testModel = TestModel()
     let databaseViewModel = DatabaseViewModel()
+    let movingMotionModel = MovingMotionModel()
     
-    func startMotionModel(){
-        motionModel.startMotionUpdates()
+    func startStillMotionModel(){
+        stillMotionModel.startMotionUpdates()
     }
     
-    func stopMotionModel() {
-        motionModel.stopMotionUpdates()
+    private func stopMotionModel() {
+        stillMotionModel.stopMotionUpdates()
     }
     
     
-    func getCurrentMotion() -> MotionData{
-        return motionModel.motionData
+    func getCurrentStillMotion() -> StillMotionData{
+        return stillMotionModel.motionData
     }
     
-    func addMotionDataToDatabase () {
-        motionModel.stopMotionUpdates()
-        let motiondata = getCurrentMotion()
-        databaseViewModel.addDataToDatabase(motionData: motiondata)
+    func addStillGestureToDatabase () {
+        stillMotionModel.stopMotionUpdates()
+        let stillMotionData = getCurrentStillMotion()
+        databaseViewModel.addStillDataToDatabase(stillMotionData: stillMotionData)
+    }
+    
+    func startMovingMotionModel () {
+        movingMotionModel.startMotionUpdates()
+    }
+    
+    func addMovingDataToDatabase () {
+        movingMotionModel.stopMotionUpdates()
+        let movingMotionData = movingMotionModel.getMovingMotionData()
+        print (movingMotionData)
+        databaseViewModel.addMovingDataToDatabase(movingMotionData: movingMotionData)
     }
     
     func getPredictedLetter() -> String {
-        let currentMotion = getCurrentMotion()
+        let currentMotion = getCurrentStillMotion()
         let prediction = testModel.testModel(incommingMotionData: currentMotion)
         
         /*if (prediction!.targetProbability["\(prediction!.___letter)"]) != nil {
