@@ -13,17 +13,26 @@ struct DetectionView: View {
     @State var isDetecting = false
     @State var word = ""
     @State var predictedLetter: String = ""
+    @State var bounce = 0
     
     let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
     let speaker = Speaker()
     
     var body: some View {
         
+        VStack {
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+        .background(Color.white)
+        
         if isDetecting {
             
             // detection screen
             Button(action: {
                 isDetecting = false
+                bounce = 0
                 word = ""
                 
             }) {
@@ -39,14 +48,14 @@ struct DetectionView: View {
             if predictedLetter == "" {
                 Image(systemName: "hand.raised.brakesignal")
                     .resizable()
-                    .frame(width: 60, height: 40)
-                    .symbolEffect(.bounce.up, options: .nonRepeating,value: predictedLetter)
-                    .foregroundColor(AppColors.detectingGesturesRed)
+                    .frame(width: 75, height: 50)
+                    .symbolEffect(.bounce.up, options: .repeating,value: bounce)
+                    .foregroundColor(AppColors.detectingRed)
                     .padding(.bottom, 65)
                     .padding(.top, 45)
                     .onReceive(timer) { _ in
                         predictedLetter = gestureViewModel.getPredictedLetter()
-                        
+                        bounce += 1                        
                     }
                 
             } else {
@@ -85,8 +94,8 @@ struct DetectionView: View {
                 Image(systemName: "hand.raised.brakesignal")
                     .resizable()
                     .frame(width: 105, height: 70)
-                    .symbolEffect(.bounce.up, options: .nonRepeating,value: false)
-                    .foregroundColor(isDetecting ? AppColors.detectingGesturesRed : AppColors.noDetectingGesturesRed)
+                    .symbolEffect(.bounce.up, options: .nonRepeating,value: predictedLetter)
+                    .foregroundColor(isDetecting ? AppColors.detectingRed : AppColors.noDetectingRed)
             }
             .font(.largeTitle)
             .buttonStyle(PlainButtonStyle())

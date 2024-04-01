@@ -19,8 +19,6 @@ class DataManagerModel: ObservableObject {
         messageHandle?.cancel()
     }
     
-    // det var inte det finaste man gjort
-    
     func addStillDataToDatabase(stillMotionData: StillMotionData) {
         let encoder = JSONEncoder()
         encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "Infinity", negativeInfinity: "-Infinity", nan: "NaN")
@@ -48,6 +46,8 @@ class DataManagerModel: ObservableObject {
         
     }
     
+    // det var inte det finaste man gjort
+    
     func addMovingDataToDatabase(movingMotionData: [MovingMotionData]) {
         let encoder = JSONEncoder()
         encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "Infinity", negativeInfinity: "-Infinity", nan: "NaN")
@@ -57,7 +57,7 @@ class DataManagerModel: ObservableObject {
             return
         }
         
-        let url = URL(string: databaseURL + path)! // Here was path
+        let url = URL(string: databaseURL + path)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

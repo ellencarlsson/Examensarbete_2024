@@ -161,9 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				C1A9BD3D2B489A72008A4771 /* StillMotionModel.swift */,
-				C14053AA2BB336C600B1939B /* TestModel.swift */,
 				C11C9EC52BBB285300FFF9CA /* MovingMotionModel.swift */,
 				C1A9BD5A2B48A8A7008A4771 /* DataManagerModel.swift */,
+				C14053AA2BB336C600B1939B /* TestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

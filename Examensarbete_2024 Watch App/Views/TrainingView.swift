@@ -40,12 +40,11 @@ struct TrainingView: View {
                     .resizable()
                     .frame(width: 150, height: 100)
                     .symbolEffect(.bounce.up, options:  isDetectingForTraining ? .repeating : .nonRepeating,value: 0)
-                    .foregroundColor(isDetectingStillMotion ? AppColors.detectingGesturesRed : Color.blue)
+                    .foregroundColor(isDetectingStillMotion ? AppColors.detectingGreen : AppColors.detectingBlue)
                 
             }
             .font(.largeTitle)
             .buttonStyle(PlainButtonStyle())
-            
             
             Text("Detecting...")
                 .font(.system(size: 12))
@@ -71,7 +70,7 @@ struct TrainingView: View {
                     .resizable()
                     .frame(width: 150, height: 100)
                     .symbolEffect(.bounce.up, options: .nonRepeating,value: false)
-                    .foregroundColor(isDetectingStillMotion ? AppColors.noDetectingGesturesRed : Color.green)
+                    .foregroundColor(isDetectingStillMotion ? AppColors.noDetectingGreen : AppColors.noDetectingBlue)
             }
             .font(.largeTitle)
             .buttonStyle(PlainButtonStyle())
@@ -84,7 +83,9 @@ struct TrainingView: View {
                 .padding(.top, 10)
             
         }
+        
     }
+        
 }
 
 #Preview {

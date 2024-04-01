@@ -39,7 +39,6 @@ class GestureViewModel: ObservableObject {
     func addMovingDataToDatabase () {
         movingMotionModel.stopMotionUpdates()
         let movingMotionData = movingMotionModel.getMovingMotionData()
-        print (movingMotionData)
         databaseViewModel.addMovingDataToDatabase(movingMotionData: movingMotionData)
     }
     
@@ -63,13 +62,13 @@ class GestureViewModel: ObservableObject {
         
         if (prediction!.___letterProbability["\(prediction!.___letter)"]) != nil {
             if prediction!.___letterProbability["\(prediction!.___letter)"]! > 0.75 {
-                print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
+                //print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
                 
                 let predictedLetter: String = prediction!.___letter
                 return predictedLetter
                 
             } else {
-                print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
+                //print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
                 
                 return ""
             }

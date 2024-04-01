@@ -8,7 +8,7 @@
 import Foundation
 import CoreMotion
 
-private let currentWord = "e" // This variable represents the word that will be trained
+private let currentWord = "hej" // This variable represents the word that will be trained
 
 struct MovingMotionData: Encodable, Decodable {
     let letter: String
@@ -22,7 +22,7 @@ struct MovingMotionData: Encodable, Decodable {
     let rotationRate_x: Double
     let rotationRate_y: Double
     let rotationRate_z: Double
-
+    
     init(
         letter: String = currentWord,
         timeStamp: Double = 0.0,
@@ -52,32 +52,24 @@ struct MovingMotionData: Encodable, Decodable {
 
 class MovingMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
-    private let databaseViewModel = DatabaseViewModel()
     var movingMotionData = MovingMotionData()
     let timeInterval = 0.2
+    var newTime = 0.0
     
     private var movingMotionArray: [MovingMotionData] = []
     
     func startMotionUpdates() {
-        print("inne0")
         if motionManager.isDeviceMotionAvailable {
-            print("inne1")
             motionManager.deviceMotionUpdateInterval = timeInterval
-            print("inne2")
             motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
-                print("inne3")
                 if let deviceMotionData = data {
                     let attitude = deviceMotionData.attitude
                     let gravity = deviceMotionData.gravity
-                    let heading = deviceMotionData.heading
+                    // let heading = deviceMotionData.heading
                     let rotationRate = deviceMotionData.rotationRate
                     
-                    // attitude represent the orientation of the device in three-dimensional space. They indicate how much the device is tilted along its respective axes.
-                    
-                    // gravity provides information about the direction of gravity relative to the device's coordinate system.
-
                     self.movingMotionData = MovingMotionData(
-                        timeStamp: self.movingMotionData.self.timeStamp + 0.2,
+                        timeStamp: self.newTime,
                         attitude_pitch: attitude.pitch,
                         attitude_roll: attitude.roll,
                         attitude_yaw: attitude.yaw,
@@ -88,13 +80,13 @@ class MovingMotionModel: ObservableObject {
                         rotationRate_y: rotationRate.y,
                         rotationRate_z: rotationRate.z
                     )
-                    print("hej")
-                    print(self.movingMotionData)
+                    
+                    self.movingMotionArray.append(self.movingMotionData)
+                    
+                    self.newTime += 0.2
                 }
                 
-                if let error = error {
-                    print("error här \(error)")
-                }
+                
             }
         }
     }
@@ -102,9 +94,9 @@ class MovingMotionModel: ObservableObject {
     func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
     }
-        
+    
     func getMovingMotionData() -> [MovingMotionData] {
-        print("current data: " + "\(self.movingMotionArray)")
+        //print("current array: " + "\(self.movingMotionArray)")
         return self.movingMotionArray
     }
 }

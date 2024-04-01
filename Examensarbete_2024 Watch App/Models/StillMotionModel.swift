@@ -42,7 +42,6 @@ struct StillMotionData: Encodable, Decodable {
 
 class StillMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
-    private let databaseViewModel = DatabaseViewModel()
     @Published var motionData = StillMotionData()
     let timeInterval = 0.1
     
@@ -74,11 +73,11 @@ class StillMotionModel: ObservableObject {
     
     func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
-        print("stopping at: " + "\(self.motionData)")
+        //print("stopping at: " + "\(self.motionData)")
     }
         
     func getCurrentMotion() -> StillMotionData {
-        print("current data: " + "\(self.motionData)")
+        //print("current data: " + "\(self.motionData)")
         return self.motionData
     }
 }
