@@ -9,7 +9,7 @@ import Foundation
 
 class GestureViewModel: ObservableObject {
     let stillMotionModel = StillMotionModel()
-    let testModel = TestModel()
+    let testModel = MotionDetectionModel()
     let databaseViewModel = DatabaseViewModel()
     let movingMotionModel = MovingMotionModel()
     
@@ -44,7 +44,7 @@ class GestureViewModel: ObservableObject {
     
     func getPredictedLetter() -> String {
         let currentMotion = getCurrentStillMotion()
-        let prediction = testModel.testModel(incommingMotionData: currentMotion)
+        let prediction = testModel.stillMotionDetecter(incommingMotionData: currentMotion)
         
         /*if (prediction!.targetProbability["\(prediction!.___letter)"]) != nil {
             if prediction!.targetProbability["\(prediction!.___letter)"]! > 0.75 {

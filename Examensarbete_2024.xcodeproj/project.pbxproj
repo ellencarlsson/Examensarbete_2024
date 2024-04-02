@@ -10,7 +10,7 @@
 		C11C9EBB2BBB203700FFF9CA /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C9EBA2BBB203700FFF9CA /* TrainingView.swift */; };
 		C11C9EBD2BBB248B00FFF9CA /* DetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C9EBC2BBB248B00FFF9CA /* DetectionView.swift */; };
 		C11C9EC62BBB285300FFF9CA /* MovingMotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C9EC52BBB285300FFF9CA /* MovingMotionModel.swift */; };
-		C14053AB2BB336C600B1939B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AA2BB336C600B1939B /* TestModel.swift */; };
+		C14053AB2BB336C600B1939B /* MotionDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */; };
 		C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053B02BB39EAF00B1939B /* Speaker.swift */; };
 		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
 		C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */; };
@@ -61,7 +61,7 @@
 		C11C9EBA2BBB203700FFF9CA /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		C11C9EBC2BBB248B00FFF9CA /* DetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionView.swift; sourceTree = "<group>"; };
 		C11C9EC52BBB285300FFF9CA /* MovingMotionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingMotionModel.swift; sourceTree = "<group>"; };
-		C14053AA2BB336C600B1939B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
+		C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetectionModel.swift; sourceTree = "<group>"; };
 		C14053B02BB39EAF00B1939B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		C1A9BD132B488A50008A4771 /* Examensarbete_2024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examensarbete_2024.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,7 +163,7 @@
 				C1A9BD3D2B489A72008A4771 /* StillMotionModel.swift */,
 				C11C9EC52BBB285300FFF9CA /* MovingMotionModel.swift */,
 				C1A9BD5A2B48A8A7008A4771 /* DataManagerModel.swift */,
-				C14053AA2BB336C600B1939B /* TestModel.swift */,
+				C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 				C11C9EBB2BBB203700FFF9CA /* TrainingView.swift in Sources */,
 				C1ABFD1A2BB70C2900DB9450 /* DetectionAERandomForest.mlmodel in Sources */,
 				C1A9BD402B489A82008A4771 /* GestureViewModel.swift in Sources */,
-				C14053AB2BB336C600B1939B /* TestModel.swift in Sources */,
+				C14053AB2BB336C600B1939B /* MotionDetectionModel.swift in Sources */,
 				C11C9EC62BBB285300FFF9CA /* MovingMotionModel.swift in Sources */,
 				C1A9BD3E2B489A72008A4771 /* StillMotionModel.swift in Sources */,
 				C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */,
