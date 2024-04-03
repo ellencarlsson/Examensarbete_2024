@@ -8,9 +8,9 @@
 import Foundation
 import CoreML
 
-class TestModel {
+class MotionDetectionModel {
     
-    func testModel (incommingMotionData: MotionData) -> DetectionAERandomForestOutput? {
+    func stillMotionDetecter (incommingMotionData: StillMotionData) -> DetectionAERandomForestOutput? {
         
         do {
             

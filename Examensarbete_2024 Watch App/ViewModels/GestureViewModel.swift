@@ -8,32 +8,43 @@
 import Foundation
 
 class GestureViewModel: ObservableObject {
-    let motionModel = MotionModel()
-    let testModel = TestModel()
+    let stillMotionModel = StillMotionModel()
+    let testModel = MotionDetectionModel()
     let databaseViewModel = DatabaseViewModel()
+    let movingMotionModel = MovingMotionModel()
     
-    func startMotionModel(){
-        motionModel.startMotionUpdates()
+    func startStillMotionModel(){
+        stillMotionModel.startMotionUpdates()
     }
     
-    func stopMotionModel() {
-        motionModel.stopMotionUpdates()
+    private func stopMotionModel() {
+        stillMotionModel.stopMotionUpdates()
     }
     
     
-    func getCurrentMotion() -> MotionData{
-        return motionModel.motionData
+    func getCurrentStillMotion() -> StillMotionData{
+        return stillMotionModel.motionData
     }
     
-    func addMotionDataToDatabase () {
-        motionModel.stopMotionUpdates()
-        let motiondata = getCurrentMotion()
-        databaseViewModel.addDataToDatabase(motionData: motiondata)
+    func addStillGestureToDatabase () {
+        stillMotionModel.stopMotionUpdates()
+        let stillMotionData = getCurrentStillMotion()
+        databaseViewModel.addStillDataToDatabase(stillMotionData: stillMotionData)
+    }
+    
+    func startMovingMotionModel () {
+        movingMotionModel.startMotionUpdates()
+    }
+    
+    func addMovingDataToDatabase () {
+        movingMotionModel.stopMotionUpdates()
+        let movingMotionData = movingMotionModel.getMovingMotionData()
+        databaseViewModel.addMovingDataToDatabase(movingMotionData: movingMotionData)
     }
     
     func getPredictedLetter() -> String {
-        let currentMotion = getCurrentMotion()
-        let prediction = testModel.testModel(incommingMotionData: currentMotion)
+        let currentMotion = getCurrentStillMotion()
+        let prediction = testModel.stillMotionDetecter(incommingMotionData: currentMotion)
         
         /*if (prediction!.targetProbability["\(prediction!.___letter)"]) != nil {
             if prediction!.targetProbability["\(prediction!.___letter)"]! > 0.75 {
@@ -51,13 +62,13 @@ class GestureViewModel: ObservableObject {
         
         if (prediction!.___letterProbability["\(prediction!.___letter)"]) != nil {
             if prediction!.___letterProbability["\(prediction!.___letter)"]! > 0.75 {
-                print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
+                //print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
                 
                 let predictedLetter: String = prediction!.___letter
                 return predictedLetter
                 
             } else {
-                print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
+                //print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
                 
                 return ""
             }

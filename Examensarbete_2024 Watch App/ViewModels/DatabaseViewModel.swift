@@ -8,9 +8,13 @@
 import Foundation
 
 class DatabaseViewModel{
-    let dataManager = DataManager()
+    let dataManager = DataManagerModel()
     
-    func addDataToDatabase(motionData: MotionData){
-        dataManager.addDataToDatabase(motionData: motionData)
+    func addStillDataToDatabase(stillMotionData: StillMotionData) {
+        dataManager.addStillDataToDatabase(stillMotionData: stillMotionData)
+    }
+    
+    func addMovingDataToDatabase(movingMotionData: [MovingMotionData]) {
+        dataManager.addMovingDataToDatabase(movingMotionData: movingMotionData)
     }
 }
