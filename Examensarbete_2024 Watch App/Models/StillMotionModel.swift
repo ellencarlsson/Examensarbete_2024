@@ -8,7 +8,7 @@
 import Foundation
 import CoreMotion
 
-private let currentLetter = "e" // This variable represents the charachter that will be trained
+private let currentLetter = "d" // This variable represents the charachter that will be trained
 
 struct StillMotionData: Encodable, Decodable {
     let letter: String
