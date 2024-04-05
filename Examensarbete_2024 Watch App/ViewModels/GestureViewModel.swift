@@ -12,13 +12,17 @@ class GestureViewModel: ObservableObject {
     let testModel = MotionDetectionModel()
     let databaseViewModel = DatabaseViewModel()
     let movingMotionModel = MovingMotionModel()
-    
+        
     func startStillMotionModel(){
         stillMotionModel.startMotionUpdates()
     }
     
     private func stopMotionModel() {
         stillMotionModel.stopMotionUpdates()
+    }
+    
+    func stopMovingMotionModel () {
+        movingMotionModel.stopMotionUpdates()
     }
     
     
@@ -40,6 +44,7 @@ class GestureViewModel: ObservableObject {
         movingMotionModel.stopMotionUpdates()
         let movingMotionData = movingMotionModel.getMovingMotionData()
         databaseViewModel.addMovingDataToDatabase(movingMotionData: movingMotionData)
+        movingMotionModel.resetTimeAndArray()
     }
     
     func getPredictedLetter() -> String {
@@ -76,5 +81,6 @@ class GestureViewModel: ObservableObject {
         
         return ""
     }
+    
     
 }

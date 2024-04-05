@@ -35,4 +35,14 @@ class MotionDetectionModel {
         return nil
         
     }
+    
+    func movingMotionDetecter () -> MovingMotionDetectionOutput? {
+        do {
+            
+        } catch {
+            
+        }
+        
+        return nil
+    }
 }

@@ -82,17 +82,25 @@ class MovingMotionModel: ObservableObject {
                     )
                     
                     self.movingMotionArray.append(self.movingMotionData)
-                    
                     self.newTime += 0.2
+                    self.newTime = (self.newTime * 10).rounded() / 10
                 }
-                
-                
             }
         }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.motionManager.stopDeviceMotionUpdates()
+                print("done detecting")
+            }
     }
     
     func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
+    }
+    
+    func resetTimeAndArray () {
+        self.newTime = 0
+        self.movingMotionArray = []
     }
     
     func getMovingMotionData() -> [MovingMotionData] {
