@@ -96,6 +96,8 @@ class MovingMotionModel: ObservableObject {
                     
                     // Increment 'newTime' by 'timeInterval'
                     self.newTime += self.timeInterval
+                    
+                     
                 }
             }
         }
