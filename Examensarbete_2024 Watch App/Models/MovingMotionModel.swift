@@ -8,10 +8,10 @@
 import Foundation
 import CoreMotion
 
-private let currentWord = "hej" // This variable represents the word that will be trained
+private let word: String = "hej"
 
 struct MovingMotionData: Encodable, Decodable {
-    let letter: String
+    let word: String
     let timeStamp: Double
     let attitude_pitch: Double
     let attitude_roll: Double
@@ -24,7 +24,7 @@ struct MovingMotionData: Encodable, Decodable {
     let rotationRate_z: Double
     
     init(
-        letter: String = currentWord,
+        word: String = "forsta", // ändra här
         timeStamp: Double = 0.0,
         attitude_pitch: Double = 0.0,
         attitude_roll: Double = 0.0,
@@ -36,7 +36,7 @@ struct MovingMotionData: Encodable, Decodable {
         rotationRate_y: Double = 0.0,
         rotationRate_z: Double = 0.0
     ) {
-        self.letter = letter
+        self.word = word
         self.timeStamp = timeStamp
         self.attitude_pitch = attitude_pitch
         self.attitude_roll = attitude_roll
@@ -91,6 +91,7 @@ class MovingMotionModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.motionManager.stopDeviceMotionUpdates()
                 print("done detecting")
+                print(self.movingMotionArray)
             }
     }
     

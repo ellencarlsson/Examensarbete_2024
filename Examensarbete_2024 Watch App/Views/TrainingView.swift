@@ -34,7 +34,6 @@ struct TrainingView: View {
 
                         isDetectingForTraining = false
                         gestureViewModel.addStillGestureToDatabase()
- 
                         vibrateAppleWatch()
                         counter += 1
                         
@@ -61,9 +60,8 @@ struct TrainingView: View {
                                 } else {
                                     timer.invalidate()
                                     
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { // skit i denna tiden
                                         gestureViewModel.addMovingDataToDatabase()
-                                        print("nu har det gått 0.6 sekunder")
                                         isDetectingForTraining = false
                                         counter += 1
                                     }
@@ -121,10 +119,10 @@ struct TrainingView: View {
                             if self.countDown > 1 {
                                 self.countDown -= 1
                             } else {
-                                print("slut")
                                 showCountDown = false
                                 isDetectingForTraining = true
                                 countDown = 3
+                                vibrateAppleWatch()
                                 gestureViewModel.startMovingMotionModel()
                                 timer.invalidate()
                             }
