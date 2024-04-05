@@ -47,6 +47,10 @@ class GestureViewModel: ObservableObject {
         movingMotionModel.resetTimeAndArray()
     }
     
+    func detectMovingMotion () {
+        testModel.movingMotionDetector()
+    }
+    
     func getPredictedLetter() -> String {
         let currentMotion = getCurrentStillMotion()
         let prediction = testModel.stillMotionDetecter(incommingMotionData: currentMotion)
@@ -65,11 +69,11 @@ class GestureViewModel: ObservableObject {
             }
         }*/
         
-        if (prediction!.___letterProbability["\(prediction!.___letter)"]) != nil {
-            if prediction!.___letterProbability["\(prediction!.___letter)"]! > 0.75 {
+        if (prediction!.letterProbability["\(prediction!.letter)"]) != nil {
+            if prediction!.letterProbability["\(prediction!.letter)"]! > 0.75 {
                 //print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
                 
-                let predictedLetter: String = prediction!.___letter
+                let predictedLetter: String = prediction!.letter
                 return predictedLetter
                 
             } else {

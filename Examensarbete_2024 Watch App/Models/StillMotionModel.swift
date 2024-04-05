@@ -64,6 +64,7 @@ class StillMotionModel: ObservableObject {
                         gravity_x: gravity.x,
                         gravity_y: gravity.y,
                         gravity_z: gravity.z
+                       
                         
                     )
                 }
