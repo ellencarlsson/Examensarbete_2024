@@ -32,7 +32,7 @@ struct TrainingView: View {
                 
                 if isDetectingStillMotion {
                     Button {
-                        
+
                         isDetectingForTraining = false
                         gestureViewModel.addStillGestureToDatabase()
                         vibrateAppleWatch()
@@ -55,19 +55,21 @@ struct TrainingView: View {
                         .symbolEffect(.bounce.up, options:  isDetectingForTraining ? .repeating : .nonRepeating,value: 0)
                         .foregroundColor(isDetectingStillMotion ? AppColors.detectingGreen : AppColors.detectingBlue)
                         .onAppear(){
-                            
-                            
-                            gestureViewModel.addMovingDataToDatabase()
-                            isDetectingForTraining = false
-                            
-                            
-                            counter += 1
-                            
-                            
+                            Timer.scheduledTimer(withTimeInterval: 1.3, repeats: false) { timer in
+                                
+
+                                    
+                                        gestureViewModel.addMovingDataToDatabase()
+                                        isDetectingForTraining = false
+                                        
+                                    
+                                
+                                counter += 1
+                            }
                         }
                 }
                 // detecting
-                
+
                 Text("Detecting...")
                     .font(.system(size: 12))
                     .foregroundColor(Color.black)
