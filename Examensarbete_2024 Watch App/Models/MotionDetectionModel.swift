@@ -37,68 +37,14 @@ class MotionDetectionModel {
     }
     
 
-    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> ellenWordOutput? {
+    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> aljonasworddetector2Output? {
         do {
             let config = MLModelConfiguration()
-            let model = try ellenWord(configuration: config)
+            let model = try aljonasworddetector2(configuration: config)
             let inputSize: NSNumber = 4
             
             
             
-            
-            let tempMotionData: [MovingMotionData] = [
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.0,
-                    attitude_pitch: -0.2443,
-                    attitude_roll: -0.2443,
-                    attitude_yaw: -0.2443,
-                    gravity_x: -0.2443,
-                    gravity_y: -0.2443,
-                    gravity_z: -0.2443,
-                    rotationRate_x: -0.2443,
-                    rotationRate_y: -0.2443,
-                    rotationRate_z: -0.2443),
-                
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.2,
-                    attitude_pitch: -0.333,
-                    attitude_roll: -0.333,
-                    attitude_yaw: -0.333,
-                    gravity_x: -0.333,
-                    gravity_y: -0.333,
-                    gravity_z: -0.333,
-                    rotationRate_x: -0.333,
-                    rotationRate_y: -0.333,
-                    rotationRate_z: -0.333),
-                
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.2,
-                    attitude_pitch: -0.888,
-                    attitude_roll: -0.888,
-                    attitude_yaw: -0.888,
-                    gravity_x: -0.888,
-                    gravity_y: -0.888,
-                    gravity_z: -0.888,
-                    rotationRate_x: -0.888,
-                    rotationRate_y: -0.888,
-                    rotationRate_z: -0.888),
-                
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.4,
-                    attitude_pitch: -0.999,
-                    attitude_roll: -0.999,
-                    attitude_yaw: -0.999,
-                    gravity_x: -0.999,
-                    gravity_y: -0.999,
-                    gravity_z: -0.999,
-                    rotationRate_x: -0.999,
-                    rotationRate_y: -0.999,
-                    rotationRate_z: -0.999)
-            ]
                         
             let attitudePitchMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
             let attitudeRollMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
@@ -112,7 +58,7 @@ class MotionDetectionModel {
             let timeStampMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
             let stateInMultiArray = try MLMultiArray(shape: [400], dataType: .double)
             
-            for (index, data) in movingMotionData.enumerated() {
+            for (index, data) in movingMotionData.prefix(4).enumerated() {
                 attitudePitchMultiArray[index] = NSNumber(value: data.attitude_pitch)
                 attitudeRollMultiArray[index] = NSNumber(value: data.attitude_roll)
                 attitudeYawMultiArray[index] = NSNumber(value: data.attitude_yaw)

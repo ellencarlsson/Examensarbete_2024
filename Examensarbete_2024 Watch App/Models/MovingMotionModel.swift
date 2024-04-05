@@ -58,7 +58,7 @@ class MovingMotionModel: ObservableObject {
     
     private var movingMotionArray: [MovingMotionData] = []
     
-    func startMotionUpdates() {
+    func startMotionUpdates(completion: @escaping () -> Void) {
         if motionManager.isDeviceMotionAvailable {
             motionManager.deviceMotionUpdateInterval = timeInterval
             motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
@@ -67,6 +67,8 @@ class MovingMotionModel: ObservableObject {
                     let gravity = deviceMotionData.gravity
                     // let heading = deviceMotionData.heading
                     let rotationRate = deviceMotionData.rotationRate
+                    
+                    print("Starting moving motion model")
                     
                     self.movingMotionData = MovingMotionData(
                         timeStamp: self.newTime,
@@ -87,12 +89,18 @@ class MovingMotionModel: ObservableObject {
                 }
             }
         }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.motionManager.stopDeviceMotionUpdates()
-                //print("done detecting")
-                print(self.movingMotionArray)
-            }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.motionManager.stopDeviceMotionUpdates()
+            //print("done detecting")
+            //print(self.movingMotionArray)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+            self?.motionManager.stopDeviceMotionUpdates()
+            print("Motion updates stopped. Collected Data:", self?.movingMotionArray ?? [])
+            completion()
+        }
     }
     
     func stopMotionUpdates () {

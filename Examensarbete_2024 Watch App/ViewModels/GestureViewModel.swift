@@ -12,7 +12,7 @@ class GestureViewModel: ObservableObject {
     let testModel = MotionDetectionModel()
     let databaseViewModel = DatabaseViewModel()
     let movingMotionModel = MovingMotionModel()
-        
+    
     func startStillMotionModel(){
         stillMotionModel.startMotionUpdates()
     }
@@ -36,9 +36,25 @@ class GestureViewModel: ObservableObject {
         databaseViewModel.addStillDataToDatabase(stillMotionData: stillMotionData)
     }
     
-    func startMovingMotionModel () {
-        movingMotionModel.startMotionUpdates()
+    func startMovingMotionModel ()  {
+        movingMotionModel.startMotionUpdates {
+            // This closure will be executed once startMotionUpdates completes its task.
+            // Any code here will be executed after the motion updates are finished.
+            
+            // For example, if you have some function to call after the updates are done, call it here.
+            // If you need to update the UI or perform other actions, do that inside this closure.
+            
+        }
     }
+    
+    func getCurrentMovingData () -> [MovingMotionData]{
+        return movingMotionModel.getMovingMotionData()
+    }
+    
+    
+    
+    
+    
     
     func addMovingDataToDatabase () {
         movingMotionModel.stopMotionUpdates()
@@ -47,45 +63,44 @@ class GestureViewModel: ObservableObject {
         movingMotionModel.resetTimeAndArray()
     }
     
-    func getPredictedWord () -> String {
-        let movingMotionData = movingMotionModel.getMovingMotionData()
-        print(movingMotionData)
-        let prediction = testModel.movingMotionDetector(movingMotionData: movingMotionData)
-        
-        if (prediction!.labelProbability["\(prediction!.label)"]) != nil {
-            if prediction!.labelProbability["\(prediction!.label)"]! > 0.60 {
-                //print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
-                
-                let predictedLetter: String = prediction!.label
-                return predictedLetter
-                
+    func getPredictedWord(completion: @escaping (String) -> Void) {
+        self.movingMotionModel.startMotionUpdates {
+            let movingMotionData = self.movingMotionModel.getMovingMotionData()
+            print(movingMotionData)
+            guard let prediction = self.testModel.movingMotionDetector(movingMotionData: movingMotionData) else {
+                completion("")
+                return
+            }
+
+            self.movingMotionModel.stopMotionUpdates()
+
+            if let probability = prediction.labelProbability[prediction.label], probability > 0.60 {
+                completion(prediction.label)
             } else {
-                //print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
-                
-                return ""
+                completion("")
             }
         }
-        
-        return ""
     }
+
+
     
     func getPredictedLetter() -> String {
         let currentMotion = getCurrentStillMotion()
         let prediction = testModel.stillMotionDetecter(incommingMotionData: currentMotion)
         
         /*if (prediction!.targetProbability["\(prediction!.___letter)"]) != nil {
-            if prediction!.targetProbability["\(prediction!.___letter)"]! > 0.75 {
-                print("är högre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
-                
-                let predictedLetter: String = prediction!.___letter
-                return predictedLetter
-                
-            } else {
-                print("är lägre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
-                
-                return ""
-            }
-        }*/
+         if prediction!.targetProbability["\(prediction!.___letter)"]! > 0.75 {
+         print("är högre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
+         
+         let predictedLetter: String = prediction!.___letter
+         return predictedLetter
+         
+         } else {
+         print("är lägre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
+         
+         return ""
+         }
+         }*/
         
         if (prediction!.letterProbability["\(prediction!.letter)"]) != nil {
             if prediction!.letterProbability["\(prediction!.letter)"]! > 0.60 {

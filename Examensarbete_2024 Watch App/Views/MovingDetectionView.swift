@@ -12,7 +12,8 @@ struct MovingDetectionView: View {
     
     @State var isDetecting = false
     @State var word = ""
-    @State var predictedWord: String = ""
+    @State private var predictedWord: String?
+    @State private var isLoading = false
     @State var bounce = 0
     @State var clickToDetect = false
     @State var countDown = 3
@@ -26,6 +27,8 @@ struct MovingDetectionView: View {
             if isDetecting {
                 
                 if clickToDetect {
+                    
+                    
                     Text("\(countDown)")
                         .foregroundColor(AppColors.detectingPink)
                         .font(.title)
@@ -34,11 +37,11 @@ struct MovingDetectionView: View {
                                 if self.countDown > 1 {
                                     self.countDown -= 1
                                 } else {
-                                    gestureViewModel.startMovingMotionModel()
                                     
+                                    getPrediction()
                                     countDown = 3
                                     vibrateAppleWatch()
-                                    speaker.speak(predictedWord)
+                                    //speaker.speak("fitta")
                                     timer.invalidate()
                                     clickToDetect = false
                                 }
@@ -46,41 +49,15 @@ struct MovingDetectionView: View {
                         }
                     
                 } else {
-                    // detection screen
-                    Button(action: {
-                        isDetecting = false
-                        bounce = 0
-                        word = ""
-                        
-                    }) {
-                        Image(systemName: "arrow.backward.circle")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.black)
-                    }
-                    .padding(-16)
-                    .padding(.trailing, 100)
-                    
-                    Text("\(predictedWord)")
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 50)
-                        .padding(.top, 45)
-                        .font(.title)
-                        .bold()
-                        .onAppear() {
-                            //predictedWord = gestureViewModel.getPredictedWord()
-                        }
                     
                     
-                    
-                    
-                    Text("\(word)")
+                    Text("hora")
+                        .foregroundColor(.black)
+                    Text("\(self.predictedWord)")
                         .foregroundColor(.black)
                         .padding(.bottom, 5)
                         .font(.system(size: 20))
                 }
-                
-                
                 
             } else {
                 
@@ -120,8 +97,21 @@ struct MovingDetectionView: View {
         
         
     }
+    
+    private func getPrediction() {
+        isLoading = true
+        predictedWord = nil // Reset the predicted word
+        
+        gestureViewModel.getPredictedWord { word in
+            DispatchQueue.main.async {
+                self.predictedWord = word
+                self.isLoading = false
+            }
+        }
+    }
 }
 
 #Preview {
     MovingDetectionView()
 }
+
