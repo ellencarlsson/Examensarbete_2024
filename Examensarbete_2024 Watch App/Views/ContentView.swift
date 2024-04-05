@@ -15,7 +15,12 @@ func vibrateAppleWatch() {
 
 struct ContentView: View {
     
-    @State private var trainingMode = false // Change here to train/real app
+
+    @State private var trainingMode = true // Change here to train/real app
+    @State private var stillDetection = false
+    @State private var sequenceDetection = false
+    @State private var movingDetection = true
+
     
     private let gestureViewModel = GestureViewModel()
     

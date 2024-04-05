@@ -8,11 +8,11 @@
 import Foundation
 import CoreMotion
 
-private let currentWord = "hej" // This variable represents the word that will be trained
+private let word: String = "imorgon"
 
 struct MovingMotionData: Encodable, Decodable {
-    let letter: String
-    let timeStamp: Double
+    let word: String
+    var timeStamp: Double
     let attitude_pitch: Double
     let attitude_roll: Double
     let attitude_yaw: Double
@@ -24,7 +24,9 @@ struct MovingMotionData: Encodable, Decodable {
     let rotationRate_z: Double
     
     init(
-        letter: String = currentWord,
+
+        word: String = "imorgon", // ändra här
+
         timeStamp: Double = 0.0,
         attitude_pitch: Double = 0.0,
         attitude_roll: Double = 0.0,
@@ -53,22 +55,33 @@ struct MovingMotionData: Encodable, Decodable {
 class MovingMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
     var movingMotionData = MovingMotionData()
-    let timeInterval = 0.2
+    let timeInterval = 0.1
     var newTime = 0.0
     
     private var movingMotionArray: [MovingMotionData] = []
     
     func startMotionUpdates() {
-        if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = timeInterval
-            motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
-                if let deviceMotionData = data {
+            if motionManager.isDeviceMotionAvailable {
+                motionManager.deviceMotionUpdateInterval = timeInterval
+                motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
+                    guard let deviceMotionData = data else { return }
+                    
+                    // Round 'newTime' to 1 decimal place
+                    self.newTime = round(self.newTime * 10) / 10
+                    
+                    // Stop updates if 'newTime' is greater than or equal to 1.2
+                    if self.newTime > 1.2 {
+                        self.motionManager.stopDeviceMotionUpdates()
+                        print(self.movingMotionArray)
+                        return
+                    }
+                    
                     let attitude = deviceMotionData.attitude
                     let gravity = deviceMotionData.gravity
-                    // let heading = deviceMotionData.heading
                     let rotationRate = deviceMotionData.rotationRate
                     
                     self.movingMotionData = MovingMotionData(
+                        word: word,
                         timeStamp: self.newTime,
                         attitude_pitch: attitude.pitch,
                         attitude_roll: attitude.roll,
@@ -83,13 +96,22 @@ class MovingMotionModel: ObservableObject {
                     
                     self.movingMotionArray.append(self.movingMotionData)
                     
+
+                    // Increment 'newTime' by 'timeInterval'
+                    self.newTime += self.timeInterval
+
                     self.newTime += 0.2
+
                 }
                 
                 
             }
         }
+
+
+
     }
+
     
     func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
