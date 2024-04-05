@@ -10,6 +10,7 @@ import SwiftUI
 struct TrainingView: View {
     var gestureViewModel = GestureViewModel()
     @State var counter = 0
+    @State var fakeCount = 0
     @State var isDetectingForTraining = false
     @State var isDetectingStillMotion = false
     @State var showCountDown = false
@@ -31,7 +32,7 @@ struct TrainingView: View {
                 
                 if isDetectingStillMotion {
                     Button {
-
+                        
                         isDetectingForTraining = false
                         gestureViewModel.addStillGestureToDatabase()
                         vibrateAppleWatch()
@@ -54,23 +55,19 @@ struct TrainingView: View {
                         .symbolEffect(.bounce.up, options:  isDetectingForTraining ? .repeating : .nonRepeating,value: 0)
                         .foregroundColor(isDetectingStillMotion ? AppColors.detectingGreen : AppColors.detectingBlue)
                         .onAppear(){
-                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                                if self.counter > 1 {
-                                    self.counter -= 1
-                                } else {
-                                    timer.invalidate()
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { // skit i denna tiden
-                                        gestureViewModel.addMovingDataToDatabase()
-                                        isDetectingForTraining = false
-                                        counter += 1
-                                    }
-                                }
-                            }
+                            
+                            
+                            gestureViewModel.addMovingDataToDatabase()
+                            isDetectingForTraining = false
+                            
+                            
+                            counter += 1
+                            
+                            
                         }
                 }
                 // detecting
-
+                
                 Text("Detecting...")
                     .font(.system(size: 12))
                     .foregroundColor(Color.black)
