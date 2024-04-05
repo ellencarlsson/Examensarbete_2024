@@ -90,7 +90,7 @@ class MovingMotionModel: ObservableObject {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.motionManager.stopDeviceMotionUpdates()
-                print("done detecting")
+                //print("done detecting")
                 print(self.movingMotionArray)
             }
     }

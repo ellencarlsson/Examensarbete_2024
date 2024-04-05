@@ -16,8 +16,11 @@ func vibrateAppleWatch() {
 struct ContentView: View {
     
     @State private var trainingMode = false // Change here to train/real app
+    @State private var stillDetection = false
+    @State private var sequenceDetection = false
+    @State private var movingDetection = true
     
-    private let gestureViewModel = GestureViewModel()
+    //private let gestureViewModel = GestureViewModel()
     
     var body: some View {
         
@@ -28,7 +31,22 @@ struct ContentView: View {
                 
             } else {
                 
-                DetectionView()
+                if stillDetection {
+                    StillDetectionView()
+                    
+                } else if sequenceDetection {
+                    SequenceDetectionView()
+                    
+                } else if movingDetection {
+                    MovingDetectionView()
+                    
+                } else {
+                    
+                    Text("no mode selected")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color.black)
+                        .multilineTextAlignment(.center)
+                }
             }
             
             /*Button(action: {
