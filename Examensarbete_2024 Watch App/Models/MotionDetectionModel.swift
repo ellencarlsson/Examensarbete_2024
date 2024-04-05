@@ -37,11 +37,11 @@ class MotionDetectionModel {
     }
     
 
-    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> aljonasworddetector2Output? {
+    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> testmodelaljona1Output? {
         do {
             let config = MLModelConfiguration()
-            let model = try aljonasworddetector2(configuration: config)
-            let inputSize: NSNumber = 4
+            let model = try testmodelaljona1(configuration: config)
+            let inputSize: NSNumber = 12
             
             
             

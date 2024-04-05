@@ -49,14 +49,25 @@ struct MovingDetectionView: View {
                         }
                     
                 } else {
+    
+                    if self.predictedWord != nil {
+                        
+                        Text("\(self.predictedWord)")
+                            .foregroundColor(.black)
+                            .padding(.bottom, 5)
+                            .font(.system(size: 20))
+                            .onAppear() {
+                                if self.predictedWord != nil {
+                                    let hej: String = self.predictedWord!
+                                    print(hej)
+                                    speaker.speak(self.predictedWord!)
+                                }
+                            }
+                    }
+                        
                     
                     
-                    Text("hora")
-                        .foregroundColor(.black)
-                    Text("\(self.predictedWord)")
-                        .foregroundColor(.black)
-                        .padding(.bottom, 5)
-                        .font(.system(size: 20))
+                   
                 }
                 
             } else {
