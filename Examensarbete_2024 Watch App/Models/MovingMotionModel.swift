@@ -53,26 +53,34 @@ struct MovingMotionData: Encodable, Decodable {
 class MovingMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
     var movingMotionData = MovingMotionData()
-    let timeInterval = 0.2
+    let timeInterval = 0.1
     var newTime = 0.0
     
     private var movingMotionArray: [MovingMotionData] = []
     
     func startMotionUpdates() {
-        if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = timeInterval
-            motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
-                if let deviceMotionData = data {
+            if motionManager.isDeviceMotionAvailable {
+                motionManager.deviceMotionUpdateInterval = timeInterval
+                motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
+                    guard let deviceMotionData = data else { return }
+                    
+                    // Round 'newTime' to 1 decimal place
+                    self.newTime = round(self.newTime * 10) / 10
+                    
+                    // Stop updates if 'newTime' is greater than or equal to 1.2
+                    if self.newTime > 1.2 {
+                        self.motionManager.stopDeviceMotionUpdates()
+                        print(self.movingMotionArray)
+                        return
+                    }
+                    
                     let attitude = deviceMotionData.attitude
                     let gravity = deviceMotionData.gravity
                     let rotationRate = deviceMotionData.rotationRate
                     
-                    // Update 'newTime' to the next expected timestamp
-                    self.newTime = Double(self.movingMotionArray.count) * 0.2
-                    
                     self.movingMotionData = MovingMotionData(
-                        word: word, // Assuming 'word' is the variable you want to use
-                        timeStamp: self.newTime, // Set the timeStamp for this entry
+                        word: word,
+                        timeStamp: self.newTime,
                         attitude_pitch: attitude.pitch,
                         attitude_roll: attitude.roll,
                         attitude_yaw: attitude.yaw,
@@ -86,19 +94,11 @@ class MovingMotionModel: ObservableObject {
                     
                     self.movingMotionArray.append(self.movingMotionData)
                     
-                    // Check if we've reached the last required timestamp
-                    if self.newTime >= 0.6 {
-                        self.motionManager.stopDeviceMotionUpdates()
-                        // No need to map and update 'timeStamp', it's already set correctly
-                        print(self.movingMotionArray)
-                        // Break out of the update loop
-                        return
-                    }
+                    // Increment 'newTime' by 'timeInterval'
+                    self.newTime += self.timeInterval
                 }
             }
         }
-    }
-
 
     
     func stopMotionUpdates () {
