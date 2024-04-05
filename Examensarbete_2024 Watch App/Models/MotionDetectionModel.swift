@@ -36,19 +36,16 @@ class MotionDetectionModel {
         
     }
     
-
-    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> ellenWordOutput? {
+    func movingMotionDetector() -> ellenWordOutput? {
         do {
             let config = MLModelConfiguration()
             let model = try ellenWord(configuration: config)
             let inputSize: NSNumber = 4
             
             
-            
-            
             let tempMotionData: [MovingMotionData] = [
                 MovingMotionData(
-                    word: "rumpa",
+                    letter: "rumpa",
                     timeStamp: 0.0,
                     attitude_pitch: -0.2443,
                     attitude_roll: -0.2443,
@@ -61,7 +58,7 @@ class MotionDetectionModel {
                     rotationRate_z: -0.2443),
                 
                 MovingMotionData(
-                    word: "rumpa",
+                    letter: "rumpa",
                     timeStamp: 0.2,
                     attitude_pitch: -0.333,
                     attitude_roll: -0.333,
@@ -74,7 +71,7 @@ class MotionDetectionModel {
                     rotationRate_z: -0.333),
                 
                 MovingMotionData(
-                    word: "rumpa",
+                    letter: "rumpa",
                     timeStamp: 0.2,
                     attitude_pitch: -0.888,
                     attitude_roll: -0.888,
@@ -87,7 +84,7 @@ class MotionDetectionModel {
                     rotationRate_z: -0.888),
                 
                 MovingMotionData(
-                    word: "rumpa",
+                    letter: "rumpa",
                     timeStamp: 0.4,
                     attitude_pitch: -0.999,
                     attitude_roll: -0.999,
@@ -112,7 +109,7 @@ class MotionDetectionModel {
             let timeStampMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
             let stateInMultiArray = try MLMultiArray(shape: [400], dataType: .double)
             
-            for (index, data) in movingMotionData.enumerated() {
+            for (index, data) in tempMotionData.enumerated() {
                 attitudePitchMultiArray[index] = NSNumber(value: data.attitude_pitch)
                 attitudeRollMultiArray[index] = NSNumber(value: data.attitude_roll)
                 attitudeYawMultiArray[index] = NSNumber(value: data.attitude_yaw)
@@ -146,6 +143,7 @@ class MotionDetectionModel {
                 stateIn: stateInMultiArray
             )
             
+            print(attitudeYawMultiArray)
             print(prediction.labelProbability, prediction.labelProbability)
             return prediction
             

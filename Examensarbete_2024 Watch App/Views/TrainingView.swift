@@ -12,43 +12,57 @@ struct TrainingView: View {
     @State var counter = 0
     @State var fakeCount = 0
     @State var isDetectingForTraining = false
-    @State var isDetectingStillMotion = false
-    @State var showCountDown = false
-    @State var countDown = 3
+    @State var isDetectingStillMotion = true
     
     var body: some View {
         
-        VStack {
+        Text("\(counter)")
+            .foregroundColor(.black)
+            .font(.title)
+        
+        if isDetectingForTraining {
             
-            if !showCountDown {
-                Text("\(counter)")
-                    .foregroundColor(.black)
-                    .font(.title)
-            }
-            
-            
-            if isDetectingForTraining && showCountDown == false{
+            // detecting
+            Button {
+                isDetectingForTraining = false
                 
+                if (isDetectingStillMotion) {
+                    gestureViewModel.addStillGestureToDatabase()
+                } else {
+                    gestureViewModel.addMovingDataToDatabase()
+                }
+                
+                
+                vibrateAppleWatch()
+                counter += 1
+                
+            } label: {
+                Image(systemName: "hand.raised.brakesignal")
+                    .resizable()
+                    .frame(width: 150, height: 100)
+                    .symbolEffect(.bounce.up, options:  isDetectingForTraining ? .repeating : .nonRepeating,value: 0)
+                    .foregroundColor(isDetectingStillMotion ? AppColors.detectingGreen : AppColors.detectingBlue)
+                
+            }
+            .font(.largeTitle)
+            .buttonStyle(PlainButtonStyle())
+            
+            Text("Detecting...")
+                .font(.system(size: 12))
+                .foregroundColor(Color.black)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 10)
+                .padding(.top, 10)
+        } else {
+            
+            // tap to detect
+            Button {
+                isDetectingForTraining = true
                 
                 if isDetectingStillMotion {
-                    Button {
-
-                        isDetectingForTraining = false
-                        gestureViewModel.addStillGestureToDatabase()
-                        vibrateAppleWatch()
-                        counter += 1
-                        
-                    } label: {
-                        Image(systemName: "hand.raised.brakesignal")
-                            .resizable()
-                            .frame(width: 150, height: 100)
-                            .symbolEffect(.bounce.up, options:  isDetectingForTraining ? .repeating : .nonRepeating,value: 0)
-                            .foregroundColor(isDetectingStillMotion ? AppColors.detectingGreen : AppColors.detectingBlue)
-                        
-                    }
-                    .font(.largeTitle)
-                    .buttonStyle(PlainButtonStyle())
+                    gestureViewModel.startStillMotionModel()
                 } else {
+
                     Image(systemName: "hand.raised.brakesignal")
                         .resizable()
                         .frame(width: 150, height: 100)
@@ -98,42 +112,33 @@ struct TrainingView: View {
                         .frame(width: 150, height: 100)
                         .symbolEffect(.bounce.up, options: .nonRepeating,value: false)
                         .foregroundColor(isDetectingStillMotion ? AppColors.noDetectingGreen : AppColors.noDetectingBlue)
+
+                    gestureViewModel.startMovingMotionModel()
+
                 }
-                .font(.largeTitle)
-                .buttonStyle(PlainButtonStyle())
                 
-                Text("Tap to detect")
-                    .font(.system(size: 12))
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 10)
-                    .padding(.top, 10)
                 
-            } else if showCountDown {
-                Text("\(countDown)")
-                    .foregroundColor(AppColors.detectingBlue)
-                    .font(.title)
-                    .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                            if self.countDown > 1 {
-                                self.countDown -= 1
-                            } else {
-                                showCountDown = false
-                                isDetectingForTraining = true
-                                countDown = 3
-                                vibrateAppleWatch()
-                                gestureViewModel.startMovingMotionModel()
-                                timer.invalidate()
-                            }
-                        }
-                    }
+            } label: {
+                Image(systemName: "hand.raised.brakesignal")
+                    .resizable()
+                    .frame(width: 150, height: 100)
+                    .symbolEffect(.bounce.up, options: .nonRepeating,value: false)
+                    .foregroundColor(isDetectingStillMotion ? AppColors.noDetectingGreen : AppColors.noDetectingBlue)
             }
+            .font(.largeTitle)
+            .buttonStyle(PlainButtonStyle())
+            
+            Text("Tap to detect")
+                .font(.system(size: 12))
+                .foregroundColor(Color.black)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 10)
+                .padding(.top, 10)
             
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white)
         
     }
+        
 }
 
 #Preview {

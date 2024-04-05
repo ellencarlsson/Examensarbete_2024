@@ -24,7 +24,9 @@ struct MovingMotionData: Encodable, Decodable {
     let rotationRate_z: Double
     
     init(
+
         word: String = "imorgon", // ändra här
+
         timeStamp: Double = 0.0,
         attitude_pitch: Double = 0.0,
         attitude_roll: Double = 0.0,
@@ -36,7 +38,7 @@ struct MovingMotionData: Encodable, Decodable {
         rotationRate_y: Double = 0.0,
         rotationRate_z: Double = 0.0
     ) {
-        self.word = word
+        self.letter = letter
         self.timeStamp = timeStamp
         self.attitude_pitch = attitude_pitch
         self.attitude_roll = attitude_roll
@@ -94,22 +96,26 @@ class MovingMotionModel: ObservableObject {
                     
                     self.movingMotionArray.append(self.movingMotionData)
                     
+
                     // Increment 'newTime' by 'timeInterval'
                     self.newTime += self.timeInterval
+kaos
                     
                      
+
                 }
+                
+                
             }
         }
+
+
+
+    }
 
     
     func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
-    }
-    
-    func resetTimeAndArray () {
-        self.newTime = 0
-        self.movingMotionArray = []
     }
     
     func getMovingMotionData() -> [MovingMotionData] {
