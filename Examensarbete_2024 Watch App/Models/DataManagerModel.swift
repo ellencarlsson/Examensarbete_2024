@@ -38,7 +38,7 @@ class DataManagerModel: ObservableObject {
             if let error = error {
                 print("Error adding data to database: \(error)")
             } else {
-                //print("Data added to database")
+                print("Data added to database")
             }
         }
         
@@ -67,7 +67,7 @@ class DataManagerModel: ObservableObject {
             if let error = error {
                 print("Error adding data to database: \(error)")
             } else {
-                //print("Data added to database")
+                print("Data added to database")
             }
         }
         
