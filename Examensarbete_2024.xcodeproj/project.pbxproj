@@ -10,6 +10,7 @@
 		C11C9EBB2BBB203700FFF9CA /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C9EBA2BBB203700FFF9CA /* TrainingView.swift */; };
 		C11C9EBD2BBB248B00FFF9CA /* DetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C9EBC2BBB248B00FFF9CA /* DetectionView.swift */; };
 		C11C9EC62BBB285300FFF9CA /* MovingMotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C9EC52BBB285300FFF9CA /* MovingMotionModel.swift */; };
+		C13888D72BC05B4800F66D84 /* aljonasdetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C13888D62BC05B4800F66D84 /* aljonasdetection.mlmodel */; };
 		C14053AB2BB336C600B1939B /* MotionDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */; };
 		C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053B02BB39EAF00B1939B /* Speaker.swift */; };
 		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
@@ -62,6 +63,7 @@
 		C11C9EBA2BBB203700FFF9CA /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		C11C9EBC2BBB248B00FFF9CA /* DetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionView.swift; sourceTree = "<group>"; };
 		C11C9EC52BBB285300FFF9CA /* MovingMotionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingMotionModel.swift; sourceTree = "<group>"; };
+		C13888D62BC05B4800F66D84 /* aljonasdetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = aljonasdetection.mlmodel; path = ../../../aljonasdetection.mlmodel; sourceTree = "<group>"; };
 		C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetectionModel.swift; sourceTree = "<group>"; };
 		C14053B02BB39EAF00B1939B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */,
+				C13888D62BC05B4800F66D84 /* aljonasdetection.mlmodel */,
 				E31AB2422BC0543500F873AE /* ellenWord.mlmodel */,
 				C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */,
 				C1A9BD4A2B48A45D008A4771 /* GoogleService-Info.plist */,
@@ -304,6 +307,7 @@
 				C11C9EBD2BBB248B00FFF9CA /* DetectionView.swift in Sources */,
 				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
 				C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */,
+				C13888D72BC05B4800F66D84 /* aljonasdetection.mlmodel in Sources */,
 				C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,7 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Examensarbete_2024 Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = J3832TVNZ7;
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examensarbete-2024-Watch-App-Info.plist";
@@ -454,7 +458,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.ellen.Examensarbete-2024.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -473,7 +477,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Examensarbete_2024 Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = J3832TVNZ7;
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examensarbete-2024-Watch-App-Info.plist";
@@ -486,7 +490,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.ellen.Examensarbete-2024.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -504,10 +508,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J3832TVNZ7;
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.ellenn.Examensarbete-2024";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -520,10 +524,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J3832TVNZ7;
+				DEVELOPMENT_TEAM = 273MNK89UR;
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.ellenn.Examensarbete-2024";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;

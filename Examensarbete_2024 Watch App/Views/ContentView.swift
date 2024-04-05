@@ -22,21 +22,21 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            /*if trainingMode {
+            if trainingMode {
     
                 TrainingView()
                 
             } else {
                 
                 DetectionView()
-            }*/
+            }
             
-            Button(action: {
+            /*Button(action: {
                 gestureViewModel.detectMovingMotion()
             }, label: {
                 /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
                     .foregroundColor(.blue)
-            })
+            })*/
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()

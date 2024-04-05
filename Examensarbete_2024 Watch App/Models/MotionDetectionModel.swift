@@ -36,14 +36,7 @@ class MotionDetectionModel {
         
     }
     
-    func movingMotionDetecter () -> MovingMotionDetectionOutput? {
-        do {
-            
-        } catch {
-            
-        }
-        
-        return nil
+
     func movingMotionDetector() -> ellenWordOutput? {
         do {
             let config = MLModelConfiguration()
@@ -53,7 +46,7 @@ class MotionDetectionModel {
             
             let tempMotionData: [MovingMotionData] = [
                 MovingMotionData(
-                    letter: "rumpa",
+                    word: "rumpa",
                     timeStamp: 0.0,
                     attitude_pitch: -0.2443,
                     attitude_roll: -0.2443,
@@ -66,7 +59,7 @@ class MotionDetectionModel {
                     rotationRate_z: -0.2443),
                 
                 MovingMotionData(
-                    letter: "rumpa",
+                    word: "rumpa",
                     timeStamp: 0.2,
                     attitude_pitch: -0.333,
                     attitude_roll: -0.333,
@@ -79,7 +72,7 @@ class MotionDetectionModel {
                     rotationRate_z: -0.333),
                 
                 MovingMotionData(
-                    letter: "rumpa",
+                    word: "rumpa",
                     timeStamp: 0.2,
                     attitude_pitch: -0.888,
                     attitude_roll: -0.888,
@@ -92,7 +85,7 @@ class MotionDetectionModel {
                     rotationRate_z: -0.888),
                 
                 MovingMotionData(
-                    letter: "rumpa",
+                    word: "rumpa",
                     timeStamp: 0.4,
                     attitude_pitch: -0.999,
                     attitude_roll: -0.999,
