@@ -8,11 +8,11 @@
 import Foundation
 import CoreMotion
 
-private let word: String = "hej"
+private let word: String = "forsta"
 
 struct MovingMotionData: Encodable, Decodable {
     let word: String
-    let timeStamp: Double
+    var timeStamp: Double
     let attitude_pitch: Double
     let attitude_roll: Double
     let attitude_yaw: Double
@@ -65,11 +65,14 @@ class MovingMotionModel: ObservableObject {
                 if let deviceMotionData = data {
                     let attitude = deviceMotionData.attitude
                     let gravity = deviceMotionData.gravity
-                    // let heading = deviceMotionData.heading
                     let rotationRate = deviceMotionData.rotationRate
                     
+                    // Update 'newTime' to the next expected timestamp
+                    self.newTime = Double(self.movingMotionArray.count) * 0.2
+                    
                     self.movingMotionData = MovingMotionData(
-                        timeStamp: self.newTime,
+                        word: word, // Assuming 'word' is the variable you want to use
+                        timeStamp: self.newTime, // Set the timeStamp for this entry
                         attitude_pitch: attitude.pitch,
                         attitude_roll: attitude.roll,
                         attitude_yaw: attitude.yaw,
@@ -82,18 +85,21 @@ class MovingMotionModel: ObservableObject {
                     )
                     
                     self.movingMotionArray.append(self.movingMotionData)
-                    self.newTime += 0.2
-                    self.newTime = (self.newTime * 10).rounded() / 10
+                    
+                    // Check if we've reached the last required timestamp
+                    if self.newTime >= 0.6 {
+                        self.motionManager.stopDeviceMotionUpdates()
+                        // No need to map and update 'timeStamp', it's already set correctly
+                        print(self.movingMotionArray)
+                        // Break out of the update loop
+                        return
+                    }
                 }
             }
         }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.motionManager.stopDeviceMotionUpdates()
-                //print("done detecting")
-                print(self.movingMotionArray)
-            }
     }
+
+
     
     func stopMotionUpdates () {
         motionManager.stopDeviceMotionUpdates()
