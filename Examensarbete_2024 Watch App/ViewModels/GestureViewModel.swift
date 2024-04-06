@@ -12,18 +12,25 @@ class GestureViewModel: ObservableObject {
         stillMotionModel.startMotionUpdates()
     }
     
+    func startStillMotionModelWithCompletion (completion: @escaping () -> Void) {
+            stillMotionModel.startMotionUpdatesWithCompletion {
+                let data = self.getCurrentStillMotion()
+                completion()
+            }
+    }
+    
     // Start the moving motion updates.
     func startMovingMotionModel() {
         movingMotionModel.startMotionUpdates()
     }
     
     func startMovingMotionModelWithCompletion (completion: @escaping () -> Void) {
-        print("börjar detecta")
+        //print("börjar detecta")
         var counter = 0
             movingMotionModel.startMotionUpdatesWithCompletion {
                 counter += 1
                 if counter == 12 {
-                    print("slutar detecta")
+                    //print("slutar detecta")
                     completion()
                 }
 
@@ -31,7 +38,7 @@ class GestureViewModel: ObservableObject {
     }
     
     // Stop still motion updates.
-    private func stopStillMotionModel() {
+    func stopStillMotionModel() {
         stillMotionModel.stopMotionUpdates()
     }
     
@@ -63,28 +70,26 @@ class GestureViewModel: ObservableObject {
     // Get the predicted word from the moving motion data.
     func getPredictedWord() -> String {
         let movingData = movingMotionModel.getMovingMotionData()
-        
-        /*print("predicted-----------------------------------")
-        print(movingData)
-        print("predicted-----------------------------------")*/
-        print("inne i get predicted")
-        
-        
         guard !movingData.isEmpty else {
             print("No motion data available for prediction.")
             return ""
         }
 
         if let prediction = testModel.movingMotionDetector(movingMotionData: movingData) {
-                print("Detektion av ordet lyckades: \(prediction.label)")
                 return prediction.label
             } else {
-                print("Ingen förutsägelse gjord.")
                 return ""
             }
     }
     
-    // The `getPredictedLetter` method seems redundant in the context as it's very similar to `getPredictedWord`.
-    // If it serves a different purpose, provide its definition here.
-    // Otherwise, consider removing it to avoid confusion and redundancy.
+    func getPredictedLetter() -> String {
+        let stillData = stillMotionModel.getCurrentMotion()
+ 
+        if let prediction = testModel.stillMotionDetecter(incommingMotionData: stillData) {
+            print(prediction.letterProbability)
+                return prediction.letter
+            } else {
+                return ""
+            }
+    }
 }

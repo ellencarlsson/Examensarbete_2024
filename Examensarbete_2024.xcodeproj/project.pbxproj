@@ -14,6 +14,7 @@
 		C13888DB2BC0618600F66D84 /* StillDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13888DA2BC0618600F66D84 /* StillDetectionView.swift */; };
 		C14053AB2BB336C600B1939B /* MotionDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */; };
 		C14053B12BB39EAF00B1939B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14053B02BB39EAF00B1939B /* Speaker.swift */; };
+		C183BC1D2BC1C48D0021EE8B /* aljonasdetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C183BC1C2BC1C48D0021EE8B /* aljonasdetection.mlmodel */; };
 		C1A5A1402B48D96200102BE4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C1A5A13F2B48D96200102BE4 /* FirebaseDatabase */; };
 		C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */; };
 		C1A9BD1A2B488A50008A4771 /* Examensarbete_2024 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -34,7 +35,6 @@
 		C1A9BD5B2B48A8A7008A4771 /* DataManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9BD5A2B48A8A7008A4771 /* DataManagerModel.swift */; };
 		C1ABFD1A2BB70C2900DB9450 /* DetectionAERandomForest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */; };
 		E31AB2432BC0543500F873AE /* ellenWord.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E31AB2422BC0543500F873AE /* ellenWord.mlmodel */; };
-		E31AB2452BC0751000F873AE /* aljonasdetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E31AB2442BC0751000F873AE /* aljonasdetection.mlmodel */; };
 		E31AB2482BC0C92100F873AE /* testmodelaljona1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E31AB2472BC0C92100F873AE /* testmodelaljona1.mlmodel */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +70,7 @@
 		C13888DA2BC0618600F66D84 /* StillDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillDetectionView.swift; sourceTree = "<group>"; };
 		C14053AA2BB336C600B1939B /* MotionDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetectionModel.swift; sourceTree = "<group>"; };
 		C14053B02BB39EAF00B1939B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		C183BC1C2BC1C48D0021EE8B /* aljonasdetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = aljonasdetection.mlmodel; path = ../../detectionmodels/aljonasdetection.mlmodel; sourceTree = "<group>"; };
 		C1A5A1412B48DC1B00102BE4 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		C1A9BD132B488A50008A4771 /* Examensarbete_2024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examensarbete_2024.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A9BD192B488A50008A4771 /* Examensarbete_2024 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Examensarbete_2024 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +86,6 @@
 		C1A9BD5A2B48A8A7008A4771 /* DataManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerModel.swift; sourceTree = "<group>"; };
 		C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DetectionAERandomForest.mlmodel; sourceTree = "<group>"; };
 		E31AB2422BC0543500F873AE /* ellenWord.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ellenWord.mlmodel; sourceTree = "<group>"; };
-		E31AB2442BC0751000F873AE /* aljonasdetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = aljonasdetection.mlmodel; path = ../../aljonasdetection.mlmodel; sourceTree = "<group>"; };
 		E31AB2472BC0C92100F873AE /* testmodelaljona1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = testmodelaljona1.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				C1ABFD192BB70C2900DB9450 /* DetectionAERandomForest.mlmodel */,
-				E31AB2442BC0751000F873AE /* aljonasdetection.mlmodel */,
+				C183BC1C2BC1C48D0021EE8B /* aljonasdetection.mlmodel */,
 				E31AB2472BC0C92100F873AE /* testmodelaljona1.mlmodel */,
 				E31AB2422BC0543500F873AE /* ellenWord.mlmodel */,
 				C1A9BD4D2B48A4DB008A4771 /* Examensarbete-2024-Watch-App-Info.plist */,
@@ -305,6 +305,7 @@
 			files = (
 				C1A9BD212B488A50008A4771 /* ContentView.swift in Sources */,
 				C1A9BD5B2B48A8A7008A4771 /* DataManagerModel.swift in Sources */,
+				C183BC1D2BC1C48D0021EE8B /* aljonasdetection.mlmodel in Sources */,
 				C11C9EBB2BBB203700FFF9CA /* TrainingView.swift in Sources */,
 				C1ABFD1A2BB70C2900DB9450 /* DetectionAERandomForest.mlmodel in Sources */,
 				C1A9BD402B489A82008A4771 /* GestureViewModel.swift in Sources */,
@@ -317,7 +318,6 @@
 				C13888DB2BC0618600F66D84 /* StillDetectionView.swift in Sources */,
 				C1A9BD322B488D6D008A4771 /* ColorScheme.swift in Sources */,
 				E31AB2482BC0C92100F873AE /* testmodelaljona1.mlmodel in Sources */,
-				E31AB2452BC0751000F873AE /* aljonasdetection.mlmodel in Sources */,
 				C1A5A1422B48DC1B00102BE4 /* DatabaseViewModel.swift in Sources */,
 				C13888D92BC05C8B00F66D84 /* MovingDetectionView.swift in Sources */,
 				C1A9BD1F2B488A50008A4771 /* Examensarbete_2024App.swift in Sources */,
