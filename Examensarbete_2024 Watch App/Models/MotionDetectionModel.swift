@@ -30,10 +30,10 @@ class MotionDetectionModel {
             let inputSize: Int = 12 // Ensure this is correct for your model
 
             // Check to ensure we do not exceed the expected input size of the model
-            guard movingMotionData.count <= inputSize else {
+            /*guard movingMotionData.count <= inputSize else {
                 print("Error: More motion data than expected by model.")
                 return nil
-            }
+            }*/
             
             // Prepare MLMultiArrays to receive the motion data
             let attitudePitchMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
@@ -48,7 +48,11 @@ class MotionDetectionModel {
             let timeStampMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
             
             // Populate MLMultiArrays with actual moving motion data
-            for (index, data) in movingMotionData.enumerated() where index < inputSize {
+            for (index, data) in movingMotionData.enumerated() {
+                guard index < inputSize else {
+                    break // Break out of the loop if index exceeds input size
+                }
+
                 attitudePitchMultiArray[index] = NSNumber(value: data.attitude_pitch)
                 attitudeRollMultiArray[index] = NSNumber(value: data.attitude_roll)
                 attitudeYawMultiArray[index] = NSNumber(value: data.attitude_yaw)

@@ -82,7 +82,7 @@ struct StillDetectionView: View {
                 
                 // tap to detect screen
                 Button {
-                    gestureViewModel.startMovingMotionModel()
+                    gestureViewModel.startStillMotionModel()
                     clickToDetect = true
                     
                     isDetecting = true

@@ -83,6 +83,40 @@ class MovingMotionModel: ObservableObject {
             }
         }
     }
+    
+    func startMotionUpdatesWithCompletion(completion: @escaping () -> Void) {
+        resetTimeAndArray()  // Reset time and array at start
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.deviceMotionUpdateInterval = timeInterval
+            motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { [weak self] (data, error) in
+                guard let self = self, let deviceMotionData = data else { return }
+
+                if self.newTime > 1.2 {
+                    self.stopMotionUpdates()
+                    completion()
+                    return
+                }
+
+                let newData = MovingMotionData(
+                    timeStamp: self.newTime,
+                    attitude_pitch: deviceMotionData.attitude.pitch,
+                    attitude_roll: deviceMotionData.attitude.roll,
+                    attitude_yaw: deviceMotionData.attitude.yaw,
+                    gravity_x: deviceMotionData.gravity.x,
+                    gravity_y: deviceMotionData.gravity.y,
+                    gravity_z: deviceMotionData.gravity.z,
+                    rotationRate_x: deviceMotionData.rotationRate.x,
+                    rotationRate_y: deviceMotionData.rotationRate.y,
+                    rotationRate_z: deviceMotionData.rotationRate.z
+                )
+                self.movingMotionArray.append(newData)
+                self.newTime += self.timeInterval
+                
+                completion()
+            }
+        }
+    }
+
 
     // Stops the motion updates and prints a message.
     func stopMotionUpdates() {

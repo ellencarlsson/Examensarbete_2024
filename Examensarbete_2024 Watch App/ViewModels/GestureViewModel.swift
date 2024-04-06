@@ -12,12 +12,22 @@ class GestureViewModel: ObservableObject {
         stillMotionModel.startMotionUpdates()
     }
     
-
-      
-
     // Start the moving motion updates.
     func startMovingMotionModel() {
         movingMotionModel.startMotionUpdates()
+    }
+    
+    func startMovingMotionModelWithCompletion (completion: @escaping () -> Void) {
+        print("börjar detecta")
+        var counter = 0
+            movingMotionModel.startMotionUpdatesWithCompletion {
+                counter += 1
+                if counter == 12 {
+                    print("slutar detecta")
+                    completion()
+                }
+
+            }
     }
     
     // Stop still motion updates.
@@ -53,6 +63,13 @@ class GestureViewModel: ObservableObject {
     // Get the predicted word from the moving motion data.
     func getPredictedWord() -> String {
         let movingData = movingMotionModel.getMovingMotionData()
+        
+        /*print("predicted-----------------------------------")
+        print(movingData)
+        print("predicted-----------------------------------")*/
+        print("inne i get predicted")
+        
+        
         guard !movingData.isEmpty else {
             print("No motion data available for prediction.")
             return ""

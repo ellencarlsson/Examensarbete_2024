@@ -2,19 +2,9 @@ import SwiftUI
 import AVFoundation
 
 
-class SpeechService {
-    private let synthesizer = AVSpeechSynthesizer()
-    
-    func speak(_ phrase: String) {
-        let utterance = AVSpeechUtterance(string: phrase)
-        utterance.voice = AVSpeechSynthesisVoice(language: "sv-SE")
-        synthesizer.speak(utterance)
-    }
-}
-
 struct MovingDetectionView: View {
     @ObservedObject var gestureViewModel = GestureViewModel()
-    let speechService = SpeechService()
+    let speaker = Speaker()
     
     @State var isDetecting = false
     @State var predictedWord: String = ""
@@ -35,30 +25,24 @@ struct MovingDetectionView: View {
                                 self.countDown -= 1
                             }
                             if self.countDown == 0 {
-                                gestureViewModel.startMovingMotionModel()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                                vibrateAppleWatch()
+                                print("countdown är 0")
+                                gestureViewModel.startMovingMotionModelWithCompletion {
                                     self.predictedWord = gestureViewModel.getPredictedWord()
-                                    gestureViewModel.stopMovingMotionModel()
-                                    self.isDetecting = false
-                                    self.clickToDetect = false
+                                    self.predictedWord = translate(withoutSwe: self.predictedWord)
                                     
-                                    // Speak the predicted word
-                                    if !self.predictedWord.isEmpty {
-                                            self.speechService.speak(self.predictedWord)
-                                    }
+                                    speaker.speak(self.predictedWord)
                                 }
+                                
+                                self.countDown = 3
+                                //self.isDetecting = false
+                                self.clickToDetect = false
+                                
+                                
                             }
                         }
                 } else {
                     // If predicted word is not empty, display it and a back button to restart
-                    if !predictedWord.isEmpty {
-                        Text("\(predictedWord)")
-                            .foregroundStyle(.black)
-                            .padding(.bottom, 50)
-                            .padding(.top, 45)
-                            .font(.title)
-                            .bold()
-                    }
                     
                     Button(action: {
                         isDetecting = false
@@ -71,6 +55,17 @@ struct MovingDetectionView: View {
                     }
                     .padding(-16)
                     .padding(.trailing, 100)
+                    
+                    if !predictedWord.isEmpty {
+                        Text("\(predictedWord)")
+                            .foregroundStyle(.black)
+                            .padding(.bottom, 50)
+                            .padding(.top, 45)
+                            .font(.title)
+                            .bold()
+                    }
+                    
+                    
                 }
             } else {
                 Button(action: {
@@ -80,17 +75,17 @@ struct MovingDetectionView: View {
                 }) {
                     Image(systemName: "hand.raised.fill")
                         .resizable()
-                        .frame(width: 105, height: 70)
+                        .frame(width: 70, height: 105)
                         .foregroundColor(isDetecting ? AppColors.detectingPink : AppColors.nodetectingPink)
                 }
                 .padding()
                 .font(.largeTitle)
+                .padding(.bottom, 30)
                 
                 Text("Tap to prepare detecting a moving hand gesture")
                     .font(.system(size: 12))
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
-                    .padding()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -103,4 +98,13 @@ struct MovingDetectionView_Previews: PreviewProvider {
     static var previews: some View {
         MovingDetectionView()
     }
+}
+
+
+private func translate (withoutSwe: String) -> String {
+    if withoutSwe == "forsta" {
+        return "förstå"
+    }
+    
+    return withoutSwe
 }
