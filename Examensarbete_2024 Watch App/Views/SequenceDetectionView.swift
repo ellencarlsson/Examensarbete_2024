@@ -48,7 +48,7 @@ struct SequenceDetectionView: View {
                         .padding(.bottom, 65)
                         .padding(.top, 45)
                         .onReceive(timer) { _ in
-                            predictedLetter = gestureViewModel.getPredictedLetter()
+                            predictedLetter = gestureViewModel.getPredictedWord()
                             bounce += 1
                         }
                     
@@ -81,7 +81,7 @@ struct SequenceDetectionView: View {
                 // tap to detect screen
                 Button {
                     gestureViewModel.startStillMotionModel()
-                    predictedLetter = gestureViewModel.getPredictedLetter()
+                    predictedLetter = gestureViewModel.getPredictedWord()
                     isDetecting = true
                     
                 } label: {

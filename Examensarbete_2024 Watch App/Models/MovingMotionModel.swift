@@ -1,12 +1,9 @@
-//
-//  MovingMotionModel.swift
-//  Examensarbete_2024 Watch App
-//
-//  Created by Ellen Carlsson on 2024-04-01.
-//
+
 
 import Foundation
 import CoreMotion
+import Combine
+
 
 private let word: String = "imorgon"
 
@@ -52,68 +49,59 @@ struct MovingMotionData: Encodable, Decodable {
 
 class MovingMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
-    var movingMotionData = MovingMotionData()
-    let timeInterval = 0.1
+    @Published var movingMotionArray: [MovingMotionData] = []
     var newTime = 0.0
-    
-    private var movingMotionArray: [MovingMotionData] = []
-    
+    let timeInterval = 0.1
+
+    // Initializes the motion updates, resets the time and array.
     func startMotionUpdates() {
-            if motionManager.isDeviceMotionAvailable {
-                motionManager.deviceMotionUpdateInterval = timeInterval
-                motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
-                    guard let deviceMotionData = data else { return }
-                    
-                    // Round 'newTime' to 1 decimal place
-                    self.newTime = round(self.newTime * 10) / 10
-                    
-                    // Stop updates if 'newTime' is greater than or equal to 1.2
-                    if self.newTime > 1.2 {
-                        self.motionManager.stopDeviceMotionUpdates()
-                        print(self.movingMotionArray)
-                        return
-                    }
-                    
-                    let attitude = deviceMotionData.attitude
-                    let gravity = deviceMotionData.gravity
-                    let rotationRate = deviceMotionData.rotationRate
-                    
-                    self.movingMotionData = MovingMotionData(
-                        word: word,
-                        timeStamp: self.newTime,
-                        attitude_pitch: attitude.pitch,
-                        attitude_roll: attitude.roll,
-                        attitude_yaw: attitude.yaw,
-                        gravity_x: gravity.x,
-                        gravity_y: gravity.y,
-                        gravity_z: gravity.z,
-                        rotationRate_x: rotationRate.x,
-                        rotationRate_y: rotationRate.y,
-                        rotationRate_z: rotationRate.z
-                    )
-                    
-                    self.movingMotionArray.append(self.movingMotionData)
-                    
-                    // Increment 'newTime' by 'timeInterval'
-                    self.newTime += self.timeInterval
-                    
-                     
+        resetTimeAndArray()  // Reset time and array at start
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.deviceMotionUpdateInterval = timeInterval
+            motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { [weak self] (data, error) in
+                guard let self = self, let deviceMotionData = data else { return }
+
+                if self.newTime > 1.2 {
+                    self.stopMotionUpdates()
+                    return
                 }
+
+                let newData = MovingMotionData(
+                    timeStamp: self.newTime,
+                    attitude_pitch: deviceMotionData.attitude.pitch,
+                    attitude_roll: deviceMotionData.attitude.roll,
+                    attitude_yaw: deviceMotionData.attitude.yaw,
+                    gravity_x: deviceMotionData.gravity.x,
+                    gravity_y: deviceMotionData.gravity.y,
+                    gravity_z: deviceMotionData.gravity.z,
+                    rotationRate_x: deviceMotionData.rotationRate.x,
+                    rotationRate_y: deviceMotionData.rotationRate.y,
+                    rotationRate_z: deviceMotionData.rotationRate.z
+                )
+                self.movingMotionArray.append(newData)
+                self.newTime += self.timeInterval
             }
         }
+    }
 
-    
-    func stopMotionUpdates () {
+    // Stops the motion updates and prints a message.
+    func stopMotionUpdates() {
         motionManager.stopDeviceMotionUpdates()
+        print("Motion updates stopped.")
     }
-    
-    func resetTimeAndArray () {
-        self.newTime = 0
-        self.movingMotionArray = []
+
+    // Resets the time and the array holding the motion data.
+    func resetTimeAndArray() {
+        newTime = 0.0
+        movingMotionArray = []
     }
-    
+
+    // Returns the collected moving motion data.
     func getMovingMotionData() -> [MovingMotionData] {
-        //print("current array: " + "\(self.movingMotionArray)")
-        return self.movingMotionArray
+        return movingMotionArray
     }
 }
+
+
+
+

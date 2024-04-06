@@ -1,118 +1,54 @@
-//
-//  TestModel.swift
-//  Examensarbete_2024 Watch App
-//
-//  Created by Ellen Carlsson on 2024-03-26.
-//
-
 import Foundation
 import CoreML
 
 class MotionDetectionModel {
     
-    func stillMotionDetecter (incommingMotionData: StillMotionData) -> aljonasdetectionOutput? {
-        
+    func stillMotionDetecter(incommingMotionData: StillMotionData) -> aljonasdetectionOutput? {
         do {
-            
             let config = MLModelConfiguration()
-            
             let model = try aljonasdetection(configuration: config)
-            
             let prediction = try model.prediction(
                 attitude_pitch: incommingMotionData.attitude_pitch,
                 attitude_roll: incommingMotionData.attitude_roll,
                 attitude_yaw: incommingMotionData.attitude_yaw,
                 gravity_x: incommingMotionData.gravity_x,
                 gravity_y: incommingMotionData.gravity_y,
-                gravity_z: incommingMotionData.gravity_z)
-            
+                gravity_z: incommingMotionData.gravity_z
+            )
             return prediction
-            
         } catch {
-            
+            // It's a good idea to handle the error more specifically here
+            print("Error in stillMotionDetecter:", error.localizedDescription)
         }
-        
         return nil
-        
     }
     
-
-    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> ellenWordOutput? {
+    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> testmodelaljona1Output? {
         do {
             let config = MLModelConfiguration()
-            let model = try ellenWord(configuration: config)
-            let inputSize: NSNumber = 4
+            let model = try testmodelaljona1(configuration: config)
+            let inputSize: Int = 12 // Ensure this is correct for your model
+
+            // Check to ensure we do not exceed the expected input size of the model
+            guard movingMotionData.count <= inputSize else {
+                print("Error: More motion data than expected by model.")
+                return nil
+            }
             
+            // Prepare MLMultiArrays to receive the motion data
+            let attitudePitchMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let attitudeRollMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let attitudeYawMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let gravityXMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let gravityYMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let gravityZMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let rotationRateXMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let rotationRateYMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let rotationRateZMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
+            let timeStampMultiArray = try MLMultiArray(shape: [inputSize as NSNumber], dataType: .double)
             
-            
-            
-            let tempMotionData: [MovingMotionData] = [
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.0,
-                    attitude_pitch: -0.2443,
-                    attitude_roll: -0.2443,
-                    attitude_yaw: -0.2443,
-                    gravity_x: -0.2443,
-                    gravity_y: -0.2443,
-                    gravity_z: -0.2443,
-                    rotationRate_x: -0.2443,
-                    rotationRate_y: -0.2443,
-                    rotationRate_z: -0.2443),
-                
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.2,
-                    attitude_pitch: -0.333,
-                    attitude_roll: -0.333,
-                    attitude_yaw: -0.333,
-                    gravity_x: -0.333,
-                    gravity_y: -0.333,
-                    gravity_z: -0.333,
-                    rotationRate_x: -0.333,
-                    rotationRate_y: -0.333,
-                    rotationRate_z: -0.333),
-                
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.2,
-                    attitude_pitch: -0.888,
-                    attitude_roll: -0.888,
-                    attitude_yaw: -0.888,
-                    gravity_x: -0.888,
-                    gravity_y: -0.888,
-                    gravity_z: -0.888,
-                    rotationRate_x: -0.888,
-                    rotationRate_y: -0.888,
-                    rotationRate_z: -0.888),
-                
-                MovingMotionData(
-                    word: "rumpa",
-                    timeStamp: 0.4,
-                    attitude_pitch: -0.999,
-                    attitude_roll: -0.999,
-                    attitude_yaw: -0.999,
-                    gravity_x: -0.999,
-                    gravity_y: -0.999,
-                    gravity_z: -0.999,
-                    rotationRate_x: -0.999,
-                    rotationRate_y: -0.999,
-                    rotationRate_z: -0.999)
-            ]
-                        
-            let attitudePitchMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let attitudeRollMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let attitudeYawMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let gravityXMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let gravityYMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let gravityZMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let rotationRateXMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let rotationRateYMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let rotationRateZMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let timeStampMultiArray = try MLMultiArray(shape: [inputSize], dataType: .double)
-            let stateInMultiArray = try MLMultiArray(shape: [400], dataType: .double)
-            
-            for (index, data) in movingMotionData.enumerated() {
+            // Populate MLMultiArrays with actual moving motion data
+            for (index, data) in movingMotionData.enumerated() where index < inputSize {
                 attitudePitchMultiArray[index] = NSNumber(value: data.attitude_pitch)
                 attitudeRollMultiArray[index] = NSNumber(value: data.attitude_roll)
                 attitudeYawMultiArray[index] = NSNumber(value: data.attitude_yaw)
@@ -123,15 +59,17 @@ class MotionDetectionModel {
                 rotationRateYMultiArray[index] = NSNumber(value: data.rotationRate_y)
                 rotationRateZMultiArray[index] = NSNumber(value: data.rotationRate_z)
                 timeStampMultiArray[index] = NSNumber(value: data.timeStamp)
-                
             }
             
-            fill(mlMultiArray: stateInMultiArray, with: 1.0)
+            // Correctly initialize stateIn
+            // Assuming 'stateIn' is a 400 element vector of doubles as previously seen in your code.
+            // Adjust the size [400] if your model requires a different state size.
+            let stateInMultiArray = try MLMultiArray(shape: [400 as NSNumber], dataType: .double)
+            for index in 0..<stateInMultiArray.count {
+                stateInMultiArray[index] = 0.0
+            }
             
-            // Fyll MLMultiArrays med hårdkodade värdena
-            
-            
-            // Gör förutsägelsen med MLMultiArrays
+            // Perform the prediction using the populated MLMultiArrays
             let prediction = try model.prediction(
                 attitude_pitch: attitudePitchMultiArray,
                 attitude_roll: attitudeRollMultiArray,
@@ -146,21 +84,13 @@ class MotionDetectionModel {
                 stateIn: stateInMultiArray
             )
             
-            print(prediction.labelProbability, prediction.labelProbability)
+            print("Moving motion detection prediction:", prediction.labelProbability)
             return prediction
             
         } catch {
-            print(error.localizedDescription)
+            // Handle errors from model prediction
+            print("Error in movingMotionDetector:", error.localizedDescription)
             return nil
         }
     }
-    
-    // fyller MLMultiArray med testvärden
-    private func fill(mlMultiArray: MLMultiArray, with value: Double) {
-        for i in 0..<mlMultiArray.count {
-            mlMultiArray[i] = NSNumber(value: value)
-        }
-    }
 }
-
-

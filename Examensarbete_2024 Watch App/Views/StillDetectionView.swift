@@ -34,7 +34,7 @@ struct StillDetectionView: View {
                                 if self.countDown > 1 {
                                     self.countDown -= 1
                                 } else {
-                                    predictedLetter = gestureViewModel.getPredictedLetter()
+                                    predictedLetter = gestureViewModel.getPredictedWord()
                                     countDown = 3
                                     vibrateAppleWatch()
                                     speaker.speak(predictedLetter)
@@ -82,7 +82,7 @@ struct StillDetectionView: View {
                 
                 // tap to detect screen
                 Button {
-                    gestureViewModel.startStillMotionModel()
+                    gestureViewModel.startMovingMotionModel()
                     clickToDetect = true
                     
                     isDetecting = true

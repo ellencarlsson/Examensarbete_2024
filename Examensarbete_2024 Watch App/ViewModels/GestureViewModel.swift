@@ -1,108 +1,73 @@
-//
-//  MotionViewModel.swift
-//  Examensarbete_2024 Watch App
-//
-//  Created by Ellen Carlsson on 2024-01-05.
-//
-
 import Foundation
+import CoreML
 
 class GestureViewModel: ObservableObject {
-    let stillMotionModel = StillMotionModel()
-    let testModel = MotionDetectionModel()
-    let databaseViewModel = DatabaseViewModel()
-    let movingMotionModel = MovingMotionModel()
-        
+    private let stillMotionModel = StillMotionModel()
+    private let movingMotionModel = MovingMotionModel()
+    private let testModel = MotionDetectionModel()
+    private let databaseViewModel = DatabaseViewModel()
+
+    // Start the still motion updates.
     func startStillMotionModel(){
         stillMotionModel.startMotionUpdates()
     }
     
-    private func stopMotionModel() {
+
+      
+
+    // Start the moving motion updates.
+    func startMovingMotionModel() {
+        movingMotionModel.startMotionUpdates()
+    }
+    
+    // Stop still motion updates.
+    private func stopStillMotionModel() {
         stillMotionModel.stopMotionUpdates()
     }
     
-    func stopMovingMotionModel () {
+    // Stop moving motion updates.
+    func stopMovingMotionModel() {
         movingMotionModel.stopMotionUpdates()
     }
     
-    
-    func getCurrentStillMotion() -> StillMotionData{
+    // Get the current still motion data.
+    func getCurrentStillMotion() -> StillMotionData {
         return stillMotionModel.motionData
     }
     
-    func addStillGestureToDatabase () {
+    // Add the still gesture to the database.
+    func addStillGestureToDatabase() {
         stillMotionModel.stopMotionUpdates()
         let stillMotionData = getCurrentStillMotion()
         databaseViewModel.addStillDataToDatabase(stillMotionData: stillMotionData)
     }
     
-    func startMovingMotionModel () {
-        movingMotionModel.startMotionUpdates()
-    }
-    
-    func addMovingDataToDatabase () {
+    // Add the moving gesture data to the database.
+    func addMovingDataToDatabase() {
         movingMotionModel.stopMotionUpdates()
         let movingMotionData = movingMotionModel.getMovingMotionData()
         databaseViewModel.addMovingDataToDatabase(movingMotionData: movingMotionData)
         movingMotionModel.resetTimeAndArray()
     }
     
-    func getPredictedWord () -> String {
-        let movingMotionData = movingMotionModel.getMovingMotionData()
-        print(movingMotionData)
-        let prediction = testModel.movingMotionDetector(movingMotionData: movingMotionData)
-        
-        if (prediction!.labelProbability["\(prediction!.label)"]) != nil {
-            if prediction!.labelProbability["\(prediction!.label)"]! > 0.60 {
-                //print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
-                
-                let predictedLetter: String = prediction!.label
-                return predictedLetter
-                
+    // Get the predicted word from the moving motion data.
+    func getPredictedWord() -> String {
+        let movingData = movingMotionModel.getMovingMotionData()
+        guard !movingData.isEmpty else {
+            print("No motion data available for prediction.")
+            return ""
+        }
+
+        if let prediction = testModel.movingMotionDetector(movingMotionData: movingData) {
+                print("Detektion av ordet lyckades: \(prediction.label)")
+                return prediction.label
             } else {
-                //print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
-                
+                print("Ingen förutsägelse gjord.")
                 return ""
             }
-        }
-        
-        return ""
     }
     
-    func getPredictedLetter() -> String {
-        let currentMotion = getCurrentStillMotion()
-        let prediction = testModel.stillMotionDetecter(incommingMotionData: currentMotion)
-        
-        /*if (prediction!.targetProbability["\(prediction!.___letter)"]) != nil {
-            if prediction!.targetProbability["\(prediction!.___letter)"]! > 0.75 {
-                print("är högre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
-                
-                let predictedLetter: String = prediction!.___letter
-                return predictedLetter
-                
-            } else {
-                print("är lägre: " + "\(prediction!.targetProbability["\(prediction!.___letter)"])")
-                
-                return ""
-            }
-        }*/
-        
-        if (prediction!.letterProbability["\(prediction!.letter)"]) != nil {
-            if prediction!.letterProbability["\(prediction!.letter)"]! > 0.60 {
-                //print("är högre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
-                
-                let predictedLetter: String = prediction!.letter
-                return predictedLetter
-                
-            } else {
-                //print("är lägre: " + "\(prediction!.___letterProbability["\(prediction!.___letter)"])")
-                
-                return ""
-            }
-        }
-        
-        return ""
-    }
-    
-    
+    // The `getPredictedLetter` method seems redundant in the context as it's very similar to `getPredictedWord`.
+    // If it serves a different purpose, provide its definition here.
+    // Otherwise, consider removing it to avoid confusion and redundancy.
 }
