@@ -34,7 +34,7 @@ struct StillDetectionView: View {
                                 if self.countDown > 1 {
                                     self.countDown -= 1
                                 } else {
-                                    predictedLetter = gestureViewModel.getPredictedLetter()
+                                    predictedLetter = gestureViewModel.getPredictedWord()
                                     countDown = 3
                                     vibrateAppleWatch()
                                     speaker.speak(predictedLetter)

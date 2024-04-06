@@ -1,57 +1,52 @@
-//
-//  MovingDetectionView.swift
-//  Examensarbete_2024 Watch App
-//
-//  Created by Ellen Carlsson on 2024-04-05.
-//
-
 import SwiftUI
+import AVFoundation
+
 
 struct MovingDetectionView: View {
-    var gestureViewModel = GestureViewModel()
+    @ObservedObject var gestureViewModel = GestureViewModel()
+    let speaker = Speaker()
     
     @State var isDetecting = false
-    @State var word = ""
     @State var predictedWord: String = ""
-    @State var bounce = 0
     @State var clickToDetect = false
     @State var countDown = 3
     
-    let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
-    let speaker = Speaker()
+    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     
     var body: some View {
-        
         VStack {
             if isDetecting {
-                
                 if clickToDetect {
                     Text("\(countDown)")
                         .foregroundColor(AppColors.detectingPink)
                         .font(.title)
-                        .onAppear {
-                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                                if self.countDown > 1 {
-                                    self.countDown -= 1
-                                } else {
-                                    gestureViewModel.startMovingMotionModel()
+                        .onReceive(timer) { _ in
+                            if self.countDown > 0 {
+                                self.countDown -= 1
+                            }
+                            if self.countDown == 0 {
+                                vibrateAppleWatch()
+                                print("countdown är 0")
+                                gestureViewModel.startMovingMotionModelWithCompletion {
+                                    self.predictedWord = gestureViewModel.getPredictedWord()
+                                    self.predictedWord = translate(withoutSwe: self.predictedWord)
                                     
-                                    countDown = 3
-                                    vibrateAppleWatch()
-                                    speaker.speak(predictedWord)
-                                    timer.invalidate()
-                                    clickToDetect = false
+                                    speaker.speak(self.predictedWord)
                                 }
+                                
+                                self.countDown = 3
+                                //self.isDetecting = false
+                                self.clickToDetect = false
+                                
+                                
                             }
                         }
-                    
                 } else {
-                    // detection screen
+                    // If predicted word is not empty, display it and a back button to restart
+                    
                     Button(action: {
                         isDetecting = false
-                        bounce = 0
-                        word = ""
-                        
+                        clickToDetect = false
                     }) {
                         Image(systemName: "arrow.backward.circle")
                             .resizable()
@@ -61,54 +56,33 @@ struct MovingDetectionView: View {
                     .padding(-16)
                     .padding(.trailing, 100)
                     
-                    Text("\(predictedWord)")
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 50)
-                        .padding(.top, 45)
-                        .font(.title)
-                        .bold()
-                        .onAppear() {
-                            //predictedWord = gestureViewModel.getPredictedWord()
-                        }
+                    if !predictedWord.isEmpty {
+                        Text("\(predictedWord)")
+                            .foregroundStyle(.black)
+                            .padding(.bottom, 50)
+                            .padding(.top, 45)
+                            .font(.title)
+                            .bold()
+                    }
                     
                     
-                    
-                    
-                    Text("\(word)")
-                        .foregroundColor(.black)
-                        .padding(.bottom, 5)
-                        .font(.system(size: 20))
                 }
-                
-                
-                
             } else {
-                
-                // tap to detect screen
-                Button {
-                    //gestureViewModel.startMovingMotionModel()
-                    clickToDetect = true
-                    
-                    isDetecting = true
-                    
-                } label: {
-                    Image(systemName: "hand.raised.brakesignal")
+                Button(action: {
+                    self.clickToDetect = true
+                    self.isDetecting = true
+                    self.countDown = 3 // Reset the countdown
+                }) {
+                    Image(systemName: "hand.raised.fill")
                         .resizable()
-                        .frame(width: 105, height: 70)
-                        .symbolEffect(.bounce.up, options: .nonRepeating,value: predictedWord)
+                        .frame(width: 70, height: 105)
                         .foregroundColor(isDetecting ? AppColors.detectingPink : AppColors.nodetectingPink)
                 }
+                .padding()
                 .font(.largeTitle)
-                .buttonStyle(PlainButtonStyle())
-                .padding(20)
+                .padding(.bottom, 30)
                 
-                
-                Text("Tap to prepare detecting a")
-                    .font(.system(size: 12))
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
-                
-                Text("moving hand gesture")
+                Text("Tap to prepare detecting a moving hand gesture")
                     .font(.system(size: 12))
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
@@ -117,11 +91,20 @@ struct MovingDetectionView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
         .background(Color.white)
-        
-        
     }
 }
 
-#Preview {
-    MovingDetectionView()
+struct MovingDetectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        MovingDetectionView()
+    }
+}
+
+
+private func translate (withoutSwe: String) -> String {
+    if withoutSwe == "forsta" {
+        return "förstå"
+    }
+    
+    return withoutSwe
 }
