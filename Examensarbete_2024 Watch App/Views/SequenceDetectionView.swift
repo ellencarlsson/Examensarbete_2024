@@ -48,8 +48,9 @@ struct SequenceDetectionView: View {
                         .padding(.bottom, 65)
                         .padding(.top, 45)
                         .onReceive(timer) { _ in
-                            predictedLetter = gestureViewModel.getPredictedWord()
+                            predictedLetter = gestureViewModel.getPredictedLetter()
                             bounce += 1
+                            print(word)
                         }
                     
                 } else {
@@ -61,9 +62,9 @@ struct SequenceDetectionView: View {
                         .bold()
                         .onAppear(perform: {
                             vibrateAppleWatch()
-                            speaker.speak(predictedLetter)
+                            //speaker.speak(predictedLetter)
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            DispatchQueue.main.asyncAfter(deadline: .now()) {
                                 word += predictedLetter
                                 predictedLetter = ""
                             }
@@ -81,7 +82,7 @@ struct SequenceDetectionView: View {
                 // tap to detect screen
                 Button {
                     gestureViewModel.startStillMotionModel()
-                    predictedLetter = gestureViewModel.getPredictedWord()
+                    predictedLetter = gestureViewModel.getPredictedLetter()
                     isDetecting = true
                     
                 } label: {

@@ -43,13 +43,41 @@ struct StillMotionData: Encodable, Decodable {
 class StillMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
     @Published var motionData = StillMotionData()
-    let timeInterval = 0.1
+    let timeInterval = 0.01
     
     func startMotionUpdates() {
         if motionManager.isDeviceMotionAvailable {
             motionManager.deviceMotionUpdateInterval = timeInterval
             motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
                 if let deviceMotionData = data {
+                    
+                    let attitude = deviceMotionData.attitude
+                    let gravity = deviceMotionData.gravity
+                    
+                    // attitude represent the orientation of the device in three-dimensional space. They indicate how much the device is tilted along its respective axes.
+                    
+                    // gravity provides information about the direction of gravity relative to the device's coordinate system.
+
+                    self.motionData = StillMotionData(
+                        attitude_pitch: attitude.pitch,
+                        attitude_roll: attitude.roll,
+                        attitude_yaw: attitude.yaw,
+                        gravity_x: gravity.x,
+                        gravity_y: gravity.y,
+                        gravity_z: gravity.z
+                       
+                    )
+                }
+            }
+        }
+    }
+    
+    func startMotionUpdatesWithCompletion(completion: @escaping () -> Void) {
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.deviceMotionUpdateInterval = timeInterval
+            motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
+                if let deviceMotionData = data {
+                    
                     let attitude = deviceMotionData.attitude
                     let gravity = deviceMotionData.gravity
                     
@@ -67,6 +95,9 @@ class StillMotionModel: ObservableObject {
                        
                         
                     )
+                    
+                    completion()
+                    //print(self.motionData)
                 }
             }
         }

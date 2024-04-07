@@ -5,7 +5,7 @@ import CoreMotion
 import Combine
 
 
-private let word: String = "imorgon"
+private let word: String = "fa"
 
 struct MovingMotionData: Encodable, Decodable {
     let word: String
@@ -21,7 +21,7 @@ struct MovingMotionData: Encodable, Decodable {
     let rotationRate_z: Double
     
     init(
-        word: String = "imorgon", // ändra här
+        word: String = "fa", // ändra här
         timeStamp: Double = 0.0,
         attitude_pitch: Double = 0.0,
         attitude_roll: Double = 0.0,

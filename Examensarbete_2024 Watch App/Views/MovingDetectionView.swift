@@ -26,7 +26,6 @@ struct MovingDetectionView: View {
                             }
                             if self.countDown == 0 {
                                 vibrateAppleWatch()
-                                print("countdown är 0")
                                 gestureViewModel.startMovingMotionModelWithCompletion {
                                     self.predictedWord = gestureViewModel.getPredictedWord()
                                     self.predictedWord = translate(withoutSwe: self.predictedWord)
@@ -104,6 +103,10 @@ struct MovingDetectionView_Previews: PreviewProvider {
 private func translate (withoutSwe: String) -> String {
     if withoutSwe == "forsta" {
         return "förstå"
+    }
+    
+    if withoutSwe == "fa" {
+        return "få"
     }
     
     return withoutSwe

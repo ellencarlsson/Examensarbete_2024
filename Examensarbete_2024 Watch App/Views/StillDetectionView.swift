@@ -11,13 +11,13 @@ struct StillDetectionView: View {
     var gestureViewModel = GestureViewModel()
     
     @State var isDetecting = false
-    @State var word = ""
     @State var predictedLetter: String = ""
     @State var bounce = 0
     @State var clickToDetect = false
     @State var countDown = 3
     
-    let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
+    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    
     let speaker = Speaker()
     
     var body: some View {
@@ -29,18 +29,23 @@ struct StillDetectionView: View {
                     Text("\(countDown)")
                         .foregroundColor(AppColors.detectingPurpule)
                         .font(.title)
-                        .onAppear {
-                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                                if self.countDown > 1 {
-                                    self.countDown -= 1
-                                } else {
-                                    predictedLetter = gestureViewModel.getPredictedWord()
-                                    countDown = 3
-                                    vibrateAppleWatch()
+                        .onReceive(timer) { _ in
+                            if self.countDown > 0 {
+                                self.countDown -= 1
+                            }
+                            
+                            if countDown == 0 {
+                                vibrateAppleWatch()
+                                gestureViewModel.startStillMotionModelWithCompletion {
+                                    print("done??")
+                                    predictedLetter = gestureViewModel.getPredictedLetter()
+                                    gestureViewModel.stopStillMotionModel()
                                     speaker.speak(predictedLetter)
-                                    timer.invalidate()
-                                    clickToDetect = false
+                                     
                                 }
+                                countDown = 3
+                                clickToDetect = false
+                                
                             }
                         }
                     
@@ -49,7 +54,7 @@ struct StillDetectionView: View {
                     Button(action: {
                         isDetecting = false
                         bounce = 0
-                        word = ""
+                        
                         
                     }) {
                         Image(systemName: "arrow.backward.circle")
@@ -66,26 +71,17 @@ struct StillDetectionView: View {
                         .padding(.top, 45)
                         .font(.title)
                         .bold()
-                        
-                    
-                    
-                    
-                    Text("\(word)")
-                        .foregroundColor(.black)
-                        .padding(.bottom, 5)
-                        .font(.system(size: 20))
+                
                 }
-                
-                
                 
             } else {
                 
                 // tap to detect screen
                 Button {
-                    gestureViewModel.startStillMotionModel()
                     clickToDetect = true
-                    
+                    predictedLetter = ""
                     isDetecting = true
+                    countDown = 3
                     
                 } label: {
                     Image(systemName: "hand.raised.brakesignal")

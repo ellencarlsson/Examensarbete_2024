@@ -23,10 +23,10 @@ class MotionDetectionModel {
         return nil
     }
     
-    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> testmodelaljona1Output? {
+    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> ellenMotionOutput? {
         do {
             let config = MLModelConfiguration()
-            let model = try testmodelaljona1(configuration: config)
+            let model = try ellenMotion(configuration: config)
             let inputSize: Int = 12 // Ensure this is correct for your model
 
             // Check to ensure we do not exceed the expected input size of the model
