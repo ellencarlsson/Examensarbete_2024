@@ -105,5 +105,9 @@ private func translate (withoutSwe: String) -> String {
         return "förstå"
     }
     
+    if withoutSwe == "fa" {
+        return "få"
+    }
+    
     return withoutSwe
 }

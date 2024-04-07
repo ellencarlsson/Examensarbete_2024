@@ -17,10 +17,8 @@ struct ContentView: View {
     
     @State private var trainingMode = false // Change here to train/real app
     @State private var stillDetection = true
-    @State private var sequenceDetection = true
+    @State private var sequenceDetection = false
     @State private var movingDetection = false
-    
-    //private let gestureViewModel = GestureViewModel()
     
     var body: some View {
         
