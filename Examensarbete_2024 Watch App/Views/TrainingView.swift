@@ -11,7 +11,7 @@ struct TrainingView: View {
     var gestureViewModel = GestureViewModel()
     @State var counter = 0
     @State var fakeCount = 0
-    @State var isDetectingForTraining = false
+    @State var isDetectingForTraining = true
     @State var isDetectingStillMotion = false
     @State var showCountDown = false
     @State var countDown = 3

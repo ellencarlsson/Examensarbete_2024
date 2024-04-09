@@ -461,7 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Examensarbete_2024 Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 273MNK89UR;
+				DEVELOPMENT_TEAM = J3832TVNZ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examensarbete-2024-Watch-App-Info.plist";
@@ -474,7 +474,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.ellen.Examensarbete-2024.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -493,7 +493,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Examensarbete_2024 Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 273MNK89UR;
+				DEVELOPMENT_TEAM = J3832TVNZ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examensarbete-2024-Watch-App-Info.plist";
@@ -506,7 +506,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.ellen.Examensarbete-2024.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -524,10 +524,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 273MNK89UR;
+				DEVELOPMENT_TEAM = J3832TVNZ7;
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.ellenn.Examensarbete-2024";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -540,10 +540,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 273MNK89UR;
+				DEVELOPMENT_TEAM = J3832TVNZ7;
 				INFOPLIST_KEY_CFBundleDisplayName = Examensarbete_2024;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "se.ellenn.Examensarbete-2024";
+				PRODUCT_BUNDLE_IDENTIFIER = "se.aljona.Examensarbete-2024";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
