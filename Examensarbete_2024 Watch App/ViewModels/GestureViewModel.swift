@@ -12,12 +12,33 @@ class GestureViewModel: ObservableObject {
         stillMotionModel.startMotionUpdates()
     }
     
-    func startStillMotionModelWithCompletion (completion: @escaping () -> Void) {
+    /*func startStillMotionModelWithCompletion (completion: @escaping () -> Void) {
             stillMotionModel.startMotionUpdatesWithCompletion {
                 let data = self.getCurrentStillMotion()
                 completion()
             }
-    }
+    }*/
+    
+    private var isModelRunning = false
+
+        func startStillMotionModelWithCompletion(completion: @escaping () -> Void) {
+            guard !isModelRunning else {
+                print("Motion model is already running.")
+                return
+            }
+            
+            isModelRunning = true
+            stillMotionModel.startMotionUpdatesWithCompletion {
+                let data = self.getCurrentStillMotion()
+                completion()
+                self.isModelRunning = false
+            }
+        }
+
+        func stopStillMotionModel() {
+            stillMotionModel.stopMotionUpdates()
+            isModelRunning = false
+        }
     
     // Start the moving motion updates.
     func startMovingMotionModel() {
@@ -38,9 +59,9 @@ class GestureViewModel: ObservableObject {
     }
     
     // Stop still motion updates.
-    func stopStillMotionModel() {
+    /*func stopStillMotionModel() {
         stillMotionModel.stopMotionUpdates()
-    }
+    }*/
     
     // Stop moving motion updates.
     func stopMovingMotionModel() {
@@ -86,10 +107,21 @@ class GestureViewModel: ObservableObject {
         let stillData = stillMotionModel.getCurrentMotion()
  
         if let prediction = testModel.stillMotionDetecter(incommingMotionData: stillData) {
-            print(prediction.letterProbability)
-                return prediction.letter
+            return prediction.letter
             } else {
                 return ""
+            }
+    }
+    
+    func getPredictedLetterAndProb() -> (String, Double) {
+        let stillData = stillMotionModel.getCurrentMotion()
+ 
+        if let prediction = testModel.stillMotionDetecter(incommingMotionData: stillData) {
+            let prob = prediction.letterProbability[prediction.letter]
+            //print(prediction.letterProbability[prediction.letter])
+            return (prediction.letter, prob!)
+            } else {
+                return ("", 0)
             }
     }
 }

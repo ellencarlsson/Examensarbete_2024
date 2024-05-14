@@ -10,80 +10,146 @@ import SwiftUI
 struct SequenceDetectionView: View {
     var gestureViewModel = GestureViewModel()
     
+    @State private var counter = 3
     @State var isDetecting = false
     @State var word = ""
     @State var predictedLetter: String = ""
     @State var bounce = 0
+    @State var prob = 0.0
+    @State var fixedWord = ""
+    @State var countDown = 3
+    @State var clickToDetect = false
     
-    let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
+    let countDownTimer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    let timer = Timer.publish(every: 0.00001, on: .main, in: .default).autoconnect()
     let speaker = Speaker()
+    @State private var timeDetector = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    
+    
     
     var body: some View {
         
         VStack {
             if isDetecting {
-                
-                // detection screen
-                Button(action: {
-                    isDetecting = false
-                    bounce = 0
-                    word = ""
-                    
-                }) {
-                    Image(systemName: "arrow.backward.circle")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.black)
-                }
-                .padding(-16)
-                .padding(.trailing, 100)
-                
-                
-                if predictedLetter == "" {
-                    Image(systemName: "hand.raised.brakesignal")
-                        .resizable()
-                        .frame(width: 75, height: 50)
-                        .symbolEffect(.bounce.up, options: .repeating,value: bounce)
-                        .foregroundColor(AppColors.detectingRed)
-                        .padding(.bottom, 65)
-                        .padding(.top, 45)
-                        .onReceive(timer) { _ in
-                            predictedLetter = gestureViewModel.getPredictedLetter()
-                            bounce += 1
-                            print(word)
+                if clickToDetect {
+                    Text("\(countDown)")
+                        .foregroundColor(AppColors.detectingPurpule)
+                        .font(.title)
+                        .onReceive(countDownTimer) { _ in
+                            if self.countDown > 0 {
+                                self.countDown -= 1
+                            }
+                            
+                            if countDown == 0 {
+                                gestureViewModel.startStillMotionModel()
+                                vibrateAppleWatch()
+                                predictedLetter = gestureViewModel.getPredictedLetterAndProb().0
+                                countDown = 3
+                                clickToDetect = false
+                                
+                            }
                         }
                     
                 } else {
-                    Text("\(predictedLetter)")
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 50)
-                        .padding(.top, 45)
-                        .font(.title)
-                        .bold()
-                        .onAppear(perform: {
-                            vibrateAppleWatch()
-                            //speaker.speak(predictedLetter)
+                    VStack {
+                        // detection screen
+                        Button(action: {
+                            isDetecting = false
+                            bounce = 0
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                word += predictedLetter
-                                predictedLetter = ""
-                            }
-                        })
-                    
+                            print(word)
+                            word = ""
+                            
+                        }) {
+                            Image(systemName: "arrow.backward.circle")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.black)
+                        }
+                        .padding(-16)
+                        .padding(.trailing, 100)
+                        
+                        
+                        if predictedLetter == "" {
+                            Image(systemName: "hand.raised.brakesignal")
+                                .resizable()
+                                .frame(width: 75, height: 50)
+                                .symbolEffect(.bounce.up, options: .repeating,value: bounce)
+                                .foregroundColor(AppColors.detectingRed)
+                                .padding(.bottom, 65)
+                                .padding(.top, 45)
+                                .onReceive(timer) { _ in
+                                    predictedLetter = gestureViewModel.getPredictedLetterAndProb().0
+                                    prob = gestureViewModel.getPredictedLetterAndProb().1
+                                    bounce += 1
+                                    //print(word)
+                                }
+                            
+                            
+                        } else {
+                            Text("\(predictedLetter)")
+                                .foregroundStyle(.black)
+                                .padding(.bottom, 50)
+                                .padding(.top, 45)
+                                .font(.title)
+                                .bold()
+                                .onAppear(perform: {
+                                    
+                                    //speaker.speak(predictedLetter)
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                        word += predictedLetter
+                                        if prob > 0.75 {
+                                            fixedWord += predictedLetter
+                                        }
+                                        predictedLetter = ""
+                                    }
+                                })
+                            
+                        }
+                        
+                        Text("\(word)")
+                            .foregroundColor(.black)
+                            .padding(.bottom, 5)
+                            .font(.system(size: 20))
+                    }
+                    .onReceive(timeDetector, perform: { _ in
+                        
+                        if counter > 0 {
+                            counter -= 1
+                        } else {
+                            
+                            print("har gått 2 sekunder")
+                            isDetecting = false
+                            counter = 3
+                            word = ""
+                            fixedWord = ""
+                            
+                        }
+                        if counter != 3{
+                            vibrateAppleWatch()
+                            
+                            print("\(word.count)" + ":   " + word + " ---- " + fixedWord)
+                            word = ""
+                            fixedWord = ""
+                            
+                        }
+                        
+                    })
                 }
                 
-                Text("\(word)")
-                    .foregroundColor(.black)
-                    .padding(.bottom, 5)
-                    .font(.system(size: 20))
+                
+                
+                
                 
             } else {
                 
                 // tap to detect screen
                 Button {
-                    gestureViewModel.startStillMotionModel()
-                    predictedLetter = gestureViewModel.getPredictedLetter()
+                    countDown = 3
+                    clickToDetect = true
                     isDetecting = true
+                    
                     
                 } label: {
                     Image(systemName: "hand.raised.brakesignal")
@@ -115,7 +181,7 @@ struct SequenceDetectionView: View {
         
         
     }
-        
+    
 }
 
 #Preview {

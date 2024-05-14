@@ -34,7 +34,7 @@ struct MovingDetectionView: View {
                                 }
                                 
                                 self.countDown = 3
-                                //self.isDetecting = false
+                                self.isDetecting = false
                                 self.clickToDetect = false
                                 
                                 
@@ -55,7 +55,7 @@ struct MovingDetectionView: View {
                     .padding(-16)
                     .padding(.trailing, 100)
                     
-                    if !predictedWord.isEmpty {
+                     if !predictedWord.isEmpty {
                         Text("\(predictedWord)")
                             .foregroundStyle(.black)
                             .padding(.bottom, 50)
@@ -71,6 +71,7 @@ struct MovingDetectionView: View {
                     self.clickToDetect = true
                     self.isDetecting = true
                     self.countDown = 3 // Reset the countdown
+                    predictedWord = ""
                 }) {
                     Image(systemName: "hand.raised.fill")
                         .resizable()

@@ -43,7 +43,7 @@ struct StillMotionData: Encodable, Decodable {
 class StillMotionModel: ObservableObject {
     private let motionManager = CMMotionManager()
     @Published var motionData = StillMotionData()
-    let timeInterval = 0.01
+    let timeInterval = 0.0001
     
     func startMotionUpdates() {
         if motionManager.isDeviceMotionAvailable {
@@ -97,7 +97,6 @@ class StillMotionModel: ObservableObject {
                     )
                     
                     completion()
-                    //print(self.motionData)
                 }
             }
         }

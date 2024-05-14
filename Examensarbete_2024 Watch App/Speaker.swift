@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import MediaPlayer
 
 class Speaker {
     let synthesizer = AVSpeechSynthesizer()
@@ -15,6 +16,9 @@ class Speaker {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "sv-SE")
 
+        
+        utterance.volume = 1.0
+        
         synthesizer.speak(utterance)
     }
 }
