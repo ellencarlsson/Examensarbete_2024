@@ -3,10 +3,10 @@ import CoreML
 
 class MotionDetectionModel {
     
-    func stillMotionDetecter(incommingMotionData: StillMotionData) -> aljonasdetectionOutput? {
+    func stillMotionDetecter(incommingMotionData: StillMotionData) -> letterDetectionOutput? {
         do {
             let config = MLModelConfiguration()
-            let model = try aljonasdetection(configuration: config)
+            let model = try letterDetection(configuration: config)
             let prediction = try model.prediction(
                 attitude_pitch: incommingMotionData.attitude_pitch,
                 attitude_roll: incommingMotionData.attitude_roll,
@@ -23,10 +23,10 @@ class MotionDetectionModel {
         return nil
     }
     
-    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> ellenMotionOutput? {
+    func movingMotionDetector(movingMotionData: [MovingMotionData]) -> wordDetectionOutput? {
         do {
             let config = MLModelConfiguration()
-            let model = try ellenMotion(configuration: config)
+            let model = try wordDetection(configuration: config)
             let inputSize: Int = 12 // Ensure this is correct for your model
 
             // Check to ensure we do not exceed the expected input size of the model
